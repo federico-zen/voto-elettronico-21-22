@@ -1,6 +1,5 @@
 .classpath
 .project
-.settings/
 log/
 target/
 pom.xml.tag
@@ -13,3 +12,4 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 *.class
+.settings/
