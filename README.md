@@ -1,6 +1,13 @@
 # 📕Voto Elettronico📕
 
-## 📌Cose Da Fare:
+## 👥Autori : 
+<p> 
+◽ Matteo Airoldi (952995)<br>
+◽ Federico Zenatti (950132) <br>
+</p>
+
+
+## 📌Task Da Completare:
 <p> 
 ◽  <br>
 ◽  <br>
