@@ -9,13 +9,15 @@
 
 ## 📌Task Da Completare:
 <p> 
-◽  diagramma dei casi d’uso e descrizione degli scenari dei casi d’uso ❌<br>
-◽ diagramma delle classi ❌ <br>
-◽ diagrammi di sequenza dei casi d’uso ❌<br>
-◽ diagrammi delle attività ❌<br>
-◽ macchine di stato ❌<br>
-◽ diagramma delle componenti ❌<br>
-◽ diagramma di deployment ❌<br>
+◽ Diagramma dei casi d’uso e descrizione degli scenari dei casi d’uso ❌<br>
+◽ Diagramma delle classi ❌ <br>
+◽ Diagrammi di sequenza dei casi d’uso ❌<br>
+◽ Diagrammi delle attività ❌<br>
+◽ Macchine di stato ❌<br>
+◽ Diagramma delle componenti ❌<br>
+◽ Diagramma di deployment ❌<br>
+◽ Definizione DataBase ❌<br>
+◽ Implementazione ❌<br>
 
 </p>
 
