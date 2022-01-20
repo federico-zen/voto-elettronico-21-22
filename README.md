@@ -9,8 +9,14 @@
 
 ## 📌Task Da Completare:
 <p> 
-◽  <br>
-◽  <br>
+◽  diagramma dei casi d’uso e descrizione degli scenari dei casi d’uso ❌<br>
+◽ diagramma delle classi ❌ <br>
+◽ diagrammi di sequenza dei casi d’uso ❌<br>
+◽ diagrammi delle attività ❌<br>
+◽ macchine di stato ❌<br>
+◽ diagramma delle componenti ❌<br>
+◽ diagramma di deployment ❌<br>
+
 </p>
 
 
