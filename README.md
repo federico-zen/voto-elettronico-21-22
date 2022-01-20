@@ -18,6 +18,7 @@
 ◽ Diagramma di deployment ❌<br>
 ◽ Definizione DataBase ❌<br>
 ◽ Implementazione ❌<br>
+◽ Testing ❌<br>
 
 </p>
 
