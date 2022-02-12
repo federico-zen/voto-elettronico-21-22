@@ -43,7 +43,7 @@
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <release>${maven.compiler.release}</release>
-                    <mainClass>votoelettronico.Main</mainClass>
+                    <mainClass>votoelettronico.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
