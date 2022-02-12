@@ -29,6 +29,12 @@ private  static Scene primaryScene;
 		
 	}
 	
+	@Override
+	public void stop(){
+	    //Chiudere le connessioni
+	    
+	}
+	
 	public static Scene getAppScene() {
         return primaryScene;
     }
