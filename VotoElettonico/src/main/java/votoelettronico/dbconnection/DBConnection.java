@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+//Classe Che serve per gestire la Connessione al DB implementata con il pattern Singleton
 public class DBConnection {
 	private String driverClassName = "com.mysql.cj.jdbc.Driver";
 	private String connectionUrl = "jdbc:mysql://localhost/votoelettronico";
@@ -20,10 +22,16 @@ public class DBConnection {
 		}
 	}
 
-	public Connection getConnection() throws SQLException {
-		
-		connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+	public Connection getConnection() {
 		return connection;
+	}
+	
+	public void openConnection() throws SQLException {
+		connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+	}
+	
+	public void closeConnection() throws SQLException {
+		connection.close();
 	}
 
 	public static DBConnection getInstance() {

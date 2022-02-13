@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="votoelettronico.controller.PresenzaController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <TextField fx:id="username" layoutX="201.0" layoutY="144.0" prefHeight="25.0" prefWidth="206.0" />
+            <Label layoutX="201.0" layoutY="119.0" prefHeight="25.0" prefWidth="103.0" text="Username Gestore" />
+            <Label layoutX="201.0" layoutY="175.0" prefHeight="25.0" prefWidth="103.0" text="Password Gestore" />
+            <PasswordField fx:id="password" layoutX="201.0" layoutY="200.0" prefHeight="25.0" prefWidth="206.0" />
+            <Text layoutX="102.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Presenza" wrappingWidth="436.13671875">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Text>
+            <Label layoutX="201.0" layoutY="234.0" prefHeight="25.0" prefWidth="206.0" text="Codice Fiscale  Elettore" />
+            <TextField fx:id="cfElettore" layoutX="201.0" layoutY="259.0" prefHeight="25.0" prefWidth="206.0" />
+            <HBox layoutX="197.0" layoutY="300.0" prefHeight="31.0" prefWidth="206.0">
+               <children>
+                  <Button fx:id="login" mnemonicParsing="false" onAction="#loginPresenza" prefHeight="31.0" prefWidth="104.0" text="Login" />
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#backToMain" prefHeight="36.0" prefWidth="104.0" text="Indietro" />
+               </children>
+            </HBox>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

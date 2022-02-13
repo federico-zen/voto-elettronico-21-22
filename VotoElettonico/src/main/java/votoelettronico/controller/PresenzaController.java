@@ -6,13 +6,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class MainController extends Controller{
+public class PresenzaController extends Controller {
+
+    @FXML
+    private Button back;
+
+    @FXML
+    private TextField cfElettore;
 
     @FXML
     private Button login;
-
-    @FXML
-    private Button loginP;
 
     @FXML
     private PasswordField password;
@@ -21,13 +24,13 @@ public class MainController extends Controller{
     private TextField username;
 
     @FXML
-    void login(ActionEvent event) {
-
+    void backToMain(ActionEvent event) {
+    	this.changeView("/fxml/main.fxml", null);
     }
 
     @FXML
     void loginPresenza(ActionEvent event) {
-    	this.changeView("/fxml/login_presenza.fxml", null);
+
     }
 
 	@Override

@@ -1,10 +1,13 @@
 package votoelettronico;
 
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import votoelettronico.dbconnection.DBConnection;
 
 public class App extends Application {
 
@@ -32,6 +35,7 @@ private  static Scene primaryScene;
 	@Override
 	public void stop(){
 	    //Chiudere le connessioni
+		
 	    
 	}
 	
