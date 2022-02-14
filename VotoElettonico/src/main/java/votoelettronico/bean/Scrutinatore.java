@@ -29,4 +29,9 @@ public class Scrutinatore extends Utente {
 		return "Scrutinatore [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
 	}
 
+	@Override
+	public boolean isElettore() {
+		return false;
+	}
+
 }

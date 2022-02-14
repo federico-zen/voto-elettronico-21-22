@@ -26,12 +26,14 @@ public class Elettore extends Utente {
 
 	//METODI
 	
-
-
-
 	@Override
 	public String toString() {
 		return "Elettore [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
+	}
+
+	@Override
+	public boolean isElettore() {
+		return true;
 	}
 	
 	

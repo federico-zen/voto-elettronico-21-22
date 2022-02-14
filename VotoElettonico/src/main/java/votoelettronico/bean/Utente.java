@@ -74,6 +74,8 @@ public abstract class Utente {
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
 	}
+	
+	public abstract boolean isElettore();
 		
 	
 }
