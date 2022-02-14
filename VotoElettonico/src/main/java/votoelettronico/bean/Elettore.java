@@ -19,7 +19,6 @@ public class Elettore extends Utente {
 	 * @param nome
 	 * @param cognome
 	 * @param username
-	 * @param eta
 	 */
 	public Elettore(String nome, String cognome, String username) {
 		super(nome, cognome, username);
