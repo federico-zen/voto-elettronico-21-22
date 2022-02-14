@@ -1,6 +1,7 @@
 package votoelettronico.dbconnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
@@ -39,5 +40,16 @@ public class DBConnection {
 			instance = new DBConnection();
 		}
 		return instance;
+	}
+	
+	public PreparedStatement prepara(String q) {
+		PreparedStatement result = null;
+		try {
+			result = connection.prepareStatement(q);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }
