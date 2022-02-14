@@ -6,7 +6,7 @@ import votoelettronico.bean.Utente;
 
 public class UtenteDAO implements GenericDAO<Utente>{
 	
-	
+	 
 
 	public Utente get(String id) {
 		// TODO Auto-generated method stub
