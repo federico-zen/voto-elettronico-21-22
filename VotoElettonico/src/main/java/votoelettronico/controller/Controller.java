@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import votoelettronico.App;
 
 public abstract  class Controller {
-	public abstract void init(Object parameter);
+	public abstract void init(Object parameters);
 	
 	
 	public void changeView(String path,Object parameters) {

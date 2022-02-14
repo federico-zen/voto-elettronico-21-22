@@ -1,5 +1,8 @@
 package votoelettronico.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,17 +28,21 @@ public class PresenzaController extends Controller {
 
     @FXML
     void backToMain(ActionEvent event) {
-    	this.changeView("/fxml/main.fxml", null);
+    	this.changeView("/fxml/main.fxml", List.of(username.getText(),password.getText()));
     }
 
     @FXML
     void loginPresenza(ActionEvent event) {
-
+    	
     }
 
 	@Override
-	public void init(Object parameter) {
-		// TODO Auto-generated method stub
+	public void init(Object parameters) {
+		if(parameters != null) {
+			List<Object> l = (List<Object>) parameters;
+			username.setText((String)l.get(0));
+			password.setText((String)l.get(1));
+		}
 		
 	}
 
