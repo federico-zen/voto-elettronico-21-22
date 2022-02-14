@@ -17,16 +17,16 @@ public class Scrutinatore extends Utente {
 	/**
 	 * @param nome
 	 * @param cognome
-	 * @param username
+	 * @param codiceFiscale
 	 */
-	public Scrutinatore(String nome, String cognome, String username) {
-		super(nome, cognome, username);
+	public Scrutinatore(String nome, String cognome, String codiceFiscale) {
+		super(nome, cognome, codiceFiscale);
 	}
 
 	//METODI
 	@Override
 	public String toString() {
-		return "Scrutinatore [nome=" + nome + ", cognome=" + cognome + ", username=" + username + "]";
+		return "Scrutinatore [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
 	}
 
 }

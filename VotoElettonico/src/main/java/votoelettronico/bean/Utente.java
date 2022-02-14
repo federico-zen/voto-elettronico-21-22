@@ -7,18 +7,18 @@ public abstract class Utente {
 	//ATTRIBUTI
 	protected String nome;
 	protected String cognome;
-	protected String username;
+	protected String codiceFiscale;
 	
 	//COSTRUTTORE
 	/**
 	 * @param nome
 	 * @param cognome
-	 * @param username
+	 * @param codiceFiscale
 	 */
-	public Utente(String nome, String cognome, String username) {
+	public Utente(String nome, String cognome, String codiceFiscale) {
 		this.nome = nome;
 		this.cognome = cognome;
-		this.username = username;
+		this.codiceFiscale = codiceFiscale;
 	}
 
 	/**
@@ -57,22 +57,22 @@ public abstract class Utente {
 	}
 
 	/**
-	 * @return the username
+	 * @return the codiceFiscale
 	 */
-	public String getUsername() {
-		return username;
+	public String getCodiceFiscale() {
+		return codiceFiscale;
 	}
 
 	/**
-	 * @param username the username to set
+	 * @param codiceFiscale the codiceFiscale to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
 	}
 
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", username=" + username + "]";
+		return "Utente [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
 	}
 		
 	

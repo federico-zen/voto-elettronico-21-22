@@ -18,11 +18,10 @@ public class Elettore extends Utente {
 	/**
 	 * @param nome
 	 * @param cognome
-	 * @param username
-	 * @param eta
+	 * @param codiceFiscale
 	 */
-	public Elettore(String nome, String cognome, String username) {
-		super(nome, cognome, username);
+	public Elettore(String nome, String cognome, String codiceFiscale) {
+		super(nome, cognome, codiceFiscale);
 	}
 
 	//METODI
@@ -32,7 +31,7 @@ public class Elettore extends Utente {
 
 	@Override
 	public String toString() {
-		return "Elettore [nome=" + nome + ", cognome=" + cognome + ", username=" + username + "]";
+		return "Elettore [nome=" + nome + ", cognome=" + cognome + ", codice fiscale=" + codiceFiscale + "]";
 	}
 	
 	
