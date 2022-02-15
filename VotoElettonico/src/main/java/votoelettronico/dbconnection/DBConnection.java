@@ -23,9 +23,6 @@ public class DBConnection {
 		}
 	}
 
-	public Connection getConnection() {
-		return connection;
-	}
 	
 	public void openConnection() throws SQLException {
 		connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
