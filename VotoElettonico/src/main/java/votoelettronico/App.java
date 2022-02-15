@@ -34,7 +34,7 @@ private  static Scene primaryScene;
 	
 	@Override
 	public void stop(){
-	    //Chiudere le connessioni
+	    //Chiudere le connessioni se aperte
 		
 	    
 	}

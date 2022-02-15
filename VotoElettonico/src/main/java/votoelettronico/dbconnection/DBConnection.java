@@ -29,7 +29,10 @@ public class DBConnection {
 	}
 	
 	public void closeConnection() throws SQLException {
-		connection.close();
+		if(!connection.isClosed()) {
+			connection.close();
+		}
+		
 	}
 
 	public static DBConnection getInstance() {

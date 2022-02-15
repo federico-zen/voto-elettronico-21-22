@@ -8,10 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import votoelettronico.bean.Utente;
-import votoelettronico.dao.GenericDAO;
-import votoelettronico.dbconnection.DBConnection;
-import votoelettronico.factory.DAOFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -33,15 +29,28 @@ public class MainController extends Controller{
     @FXML
     void login(ActionEvent event) {
     	
-    	String user ,psw;
+    	
 
     	if(username.getText().isEmpty() || password.getText().isEmpty() ) {
     		Alert t = new Alert(AlertType.INFORMATION,"Inserire tutti i campi");
     		t.showAndWait();
+    	}else {
+    		String user=username.getText() ,psw=password.getText();
+    		System.out.println("Username : "+user);
+    		System.out.println("Password : "+psw);
+    		
+    		/*
+    		 * if (getDB == null){
+    		 * 		Alert t = new Alert (AlertType.INFORMATION,"Username o Password Errati");
+    		 * 		t.showAndWait();
+    		 * }else{
+    		 * 
+    		 * 	...changeView()..;
+    		 * 
+    		 * }
+    		 * 
+    		 */
     	}
-    	
-    	
-    	
     }
 
     @FXML
