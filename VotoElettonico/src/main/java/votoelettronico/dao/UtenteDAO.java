@@ -114,7 +114,29 @@ public class UtenteDAO implements GenericDAO<Utente>{
 	public void save(Utente t) {
 		
 		String query ="INSERT INTO Utente(nome,cognome,username,ruolo) VALUES(?,?,?,?);";
+		if(t==null) {
+			throw new NullPointerException();
+		}
+		String ruolo="";
+		if(t.isElettore()) {
+			ruolo="Elettore";
+		}else {
+			ruolo ="Scrutinatore";
+		}
 		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
+			preparedStatement.setString(1, t.getNome()); 
+			preparedStatement.setString(2, t.getCognome());
+			preparedStatement.setString(3, t.getCodiceFiscale());
+			preparedStatement.setString(4, ruolo);
+			/*int row =*/preparedStatement.executeUpdate();
+			DBConnection.getInstance().closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
 	}
 
 	public void update(Utente t, String[] params) {
