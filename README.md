@@ -15,7 +15,7 @@
 ◽ Diagrammi delle attività ❌<br>
 ◽ Macchine di stato ❌<br>
 ◽ Diagramma delle componenti ❌<br>
-◽ Diagramma di deployment ❌<br>
+◽ Diagramma di deployment ✔️<br>
 ◽ Definizione DataBase ❌<br>
 ◽ Implementazione ❌<br>
 ◽ Testing ❌<br>
