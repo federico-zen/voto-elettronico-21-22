@@ -142,13 +142,37 @@ public class UtenteDAO implements GenericDAO<Utente>{
 	public void update(Utente t, String[] params) {
 		
 		String query = "UPDATE Utente SET nome = ? , cognome = ? WHERE username = ?;";
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
+			preparedStatement.setString(1, t.getNome()); 
+			preparedStatement.setString(2, t.getCognome());
+			preparedStatement.setString(3, t.getCodiceFiscale());
+			preparedStatement.executeUpdate();
+			DBConnection.getInstance().closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 
 	public void delete(Utente t) {
 		String query = "DELETE FROM Utente WHERE username = ?";
 		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
+			preparedStatement.setString(1, t.getCodiceFiscale()); 
+			preparedStatement.executeUpdate();
+			DBConnection.getInstance().closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
+	
 
 
 }
