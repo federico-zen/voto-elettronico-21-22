@@ -2,6 +2,7 @@ package votoelettronico.logger;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -25,10 +26,12 @@ public class VotoLogger {
 		
 	}
 	
-	public static Logger getInstance() {
-		return logger;
-		
+	public static void writeToLog(String msg) {
+		logger.info(msg);
 	}
 	
+	public static void writeToLog(String msg,Level level,Exception e) {
+		logger.log(level,msg,e);
+	}
 	
-}
+}	
