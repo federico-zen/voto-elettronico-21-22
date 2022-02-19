@@ -1,13 +1,11 @@
 package votoelettronico;
 
-import java.sql.SQLException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import votoelettronico.dbconnection.DBConnection;
+import votoelettronico.logger.VotoLogger;
 
 public class App extends Application {
 
@@ -21,6 +19,7 @@ private  static Scene primaryScene;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		VotoLogger.init();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/fxml/main.fxml"));
 		Parent content = loader.load(); 
@@ -30,13 +29,6 @@ private  static Scene primaryScene;
         primaryStage.setScene(main);
         primaryStage.show();
 		
-	}
-	
-	@Override
-	public void stop(){
-	    //Chiudere le connessioni se aperte
-		
-	    
 	}
 	
 	public static Scene getAppScene() {
