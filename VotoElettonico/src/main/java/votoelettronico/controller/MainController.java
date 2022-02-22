@@ -12,6 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import votoelettronico.bean.Elettore;
+import votoelettronico.bean.Utente;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.factory.DAOFactory;
 
@@ -43,12 +45,14 @@ public class MainController extends Controller{
     		System.out.println("Password : "+psw);
     		
     		UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
-    		if (Objects.isNull(dao.get(user, psw))) {
+    		Utente u = dao.get(user, psw);
+    		if (Objects.isNull(u)) {
     			//messaggio di errore e l'utente reinserisce i dati
     			Alert t = new Alert(AlertType.ERROR, "I dati inseriti non corrispondono ad alcun utente registrato.");
     			t.showAndWait();
     		} else {
     			//cambia finestra alla sessione di voto
+    			Elettore elettore = (Elettore) u;
     			this.changeView("", null);
     		}
     	}
