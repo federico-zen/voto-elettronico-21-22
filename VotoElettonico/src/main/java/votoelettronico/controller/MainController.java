@@ -61,6 +61,7 @@ public class MainController extends Controller{
 	@Override
 	public void init(Object parameters) {
 		if(parameters != null) {
+			@SuppressWarnings("unchecked")
 			List<Object> l = (List<Object>) parameters;
 			username.setText((String)l.get(0));
 			password.setText((String)l.get(1));

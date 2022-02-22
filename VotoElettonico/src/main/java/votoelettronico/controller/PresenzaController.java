@@ -1,6 +1,5 @@
 package votoelettronico.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -39,6 +38,7 @@ public class PresenzaController extends Controller {
 	@Override
 	public void init(Object parameters) {
 		if(parameters != null) {
+			@SuppressWarnings("unchecked")
 			List<Object> l = (List<Object>) parameters;
 			username.setText((String)l.get(0));
 			password.setText((String)l.get(1));
