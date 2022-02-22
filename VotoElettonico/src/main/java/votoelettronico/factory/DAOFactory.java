@@ -1,7 +1,9 @@
 package votoelettronico.factory;
 
+import votoelettronico.bean.Partecipante;
 import votoelettronico.bean.Utente;
 import votoelettronico.dao.GenericDAO;
+import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.UtenteDAO;
 
 public class DAOFactory {
@@ -22,6 +24,10 @@ public class DAOFactory {
 	
 	public GenericDAO<Utente> getUtenteDAO() {
 		return new UtenteDAO();
+	}
+	
+	public GenericDAO<Partecipante> getPartecipanteDAO() {
+		return new PartecipanteDAO();
 	}
 	
 	

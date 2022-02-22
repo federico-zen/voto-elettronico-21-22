@@ -7,7 +7,9 @@ public class Partito extends Partecipante {
 	
 	
 	//Immagine
-	
+	public Partito(String nome) {
+		super.nome=nome;
+	}
 	
 	@Override
 	public boolean isPartito() {
