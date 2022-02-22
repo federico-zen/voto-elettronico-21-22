@@ -23,7 +23,8 @@ public class DAOFactory {
 	public GenericDAO<Utente> getUtenteDAO() {
 		return new UtenteDAO();
 	}
-
+	
+	
 	
 
 }
