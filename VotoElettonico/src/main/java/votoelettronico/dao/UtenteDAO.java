@@ -16,7 +16,7 @@ import votoelettronico.dbconnection.DBConnection;
 public class UtenteDAO implements GenericDAO<Utente>{
 	
 	 
-	
+	//Prede dal DB l'utente con username = id
 	public Utente get(String id) {
 
 		Utente t = null;
@@ -44,7 +44,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		return t;
 	}
-	
+	//Prende dal DB l'utente con username e psw uguale a quelli passati per parametro
 	public Utente get(String id,String psw) {
 		Utente t = null;
 
@@ -86,7 +86,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		return t;
 	}
-
+	//Restituisce la lista di utenti
 	public List<Utente> getAll() {
 		
 		List<Utente> l= new ArrayList<Utente>();
@@ -110,7 +110,8 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		return l;
 	}
-
+	
+	//Inserisce l'utente t nel Database
 	public void save(Utente t) {
 		
 		String query ="INSERT INTO Utente(nome,cognome,username,ruolo) VALUES(?,?,?,?);";
@@ -138,7 +139,8 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		}
 				
 	}
-
+	
+	//Modifica l'utente dati i parametri
 	public void update(Utente t, String[] params) {
 		
 		String query = "UPDATE Utente SET nome = ? , cognome = ? WHERE username = ?;";
@@ -156,7 +158,8 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		
 	}
-
+	
+	//Elimina l'utente t
 	public void delete(Utente t) {
 		String query = "DELETE FROM Utente WHERE username = ?";
 		
