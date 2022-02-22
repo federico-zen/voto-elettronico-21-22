@@ -36,10 +36,11 @@ CREATE TABLE sessione (
 	nome VARCHAR(255) NOT NULL,
 	modalita_voto enum('Ordinale','Categorico','Categorico-Preferenze','Referendum') NOT NULL,
 	modalita_vittoria enum('Maggioranza','Maggioranza-Assoluta','Quorum','Senza-Quorum') NOT NULL,
+	domanda VARCHAR (255),
 	stato BOOLEAN NOT NULL,
 	PRIMARY KEY (id)
 );
-
+/* Il candidato/partito partecipa all'elezione*/
 CREATE TABLE partecipazione (
 	idSessione integer NOT NULL,
 	idCandidato integer NOT NULL,
@@ -48,7 +49,7 @@ CREATE TABLE partecipazione (
 	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
 
 );
-
+/*L'utente Vota nella sessione*/
 CREATE TABLE votazione(
 	idUtente varchar(255) NOT NULL,
 	idSessione integer NOT NULL,
@@ -57,4 +58,16 @@ CREATE TABLE votazione(
 	FOREIGN KEY (idUtente) REFERENCES utente(username)
 );
 
+/*Voto Utente*/
+CREATE TABLE voto (
+	id integer NOT NULL AUTO_INCREMENT,
+	idSessione integer NOT NULL ,
+	ordine integer , 
+	risposta BOOLEAN ,
+	idCandidato integer ,	
+	PRIMARY KEY (id),
+	FOREIGN KEY (idSessione) REFERENCES sessione(id),
+	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
+	
+);
 
