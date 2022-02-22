@@ -29,7 +29,7 @@ public abstract class Utente {
 	
 	//METODI
 	/**
-	 * @return the nome
+	 * @return il nome
 	 */
 	public String getNome() {
 		return nome;
