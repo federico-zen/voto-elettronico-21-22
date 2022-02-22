@@ -3,6 +3,7 @@ package votoelettronico.controller;
 
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import votoelettronico.dao.UtenteDAO;
+import votoelettronico.factory.DAOFactory;
 
 public class MainController extends Controller{
 
@@ -39,17 +42,15 @@ public class MainController extends Controller{
     		System.out.println("Username : "+user);
     		System.out.println("Password : "+psw);
     		
-    		/*
-    		 * if (getDB == null){
-    		 * 		Alert t = new Alert (AlertType.INFORMATION,"Username o Password Errati");
-    		 * 		t.showAndWait();
-    		 * }else{
-    		 * 
-    		 * 	...changeView()..;
-    		 * 
-    		 * }
-    		 * 
-    		 */
+    		UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
+    		if (Objects.isNull(dao.get(user, psw))) {
+    			//messaggio di errore e l'utente reinserisce i dati
+    			Alert t = new Alert(AlertType.ERROR, "I dati inseriti non corrispondono ad alcun utente registrato.");
+    			t.showAndWait();
+    		} else {
+    			//cambia finestra alla sessione di voto
+    			this.changeView("", null);
+    		}
     	}
     }
 
