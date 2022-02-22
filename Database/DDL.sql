@@ -48,3 +48,13 @@ CREATE TABLE partecipazione (
 	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
 
 );
+
+CREATE TABLE votazione(
+	idUtente varchar(255) NOT NULL,
+	idSessione integer NOT NULL,
+	PRIMARY KEY (idUtente,idSessione),
+	FOREIGN KEY (idSessione) REFERENCES sessione(id),
+	FOREIGN KEY (idUtente) REFERENCES utente(username)
+);
+
+
