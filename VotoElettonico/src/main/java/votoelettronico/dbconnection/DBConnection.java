@@ -10,7 +10,7 @@ public class DBConnection {
 	private String driverClassName = "com.mysql.cj.jdbc.Driver";
 	private String connectionUrl = "jdbc:mysql://localhost/votoelettronico";
 	private String dbUser = "root";
-	private String dbPwd = "root";
+	private String dbPwd = "";
 
 	private static DBConnection instance = null;
 	private Connection connection = null;
