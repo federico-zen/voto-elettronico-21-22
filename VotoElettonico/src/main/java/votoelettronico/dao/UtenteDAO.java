@@ -9,9 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import votoelettronico.bean.*;
 import votoelettronico.dbconnection.DBConnection;
+import votoelettronico.logger.VotoLogger;
 
 public class UtenteDAO implements GenericDAO<Utente>{
 	
@@ -38,7 +40,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 				
 			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		
@@ -56,9 +58,9 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			digest.update(psw.getBytes("utf8"));
 			sha1 = String.format("%040x", new BigInteger(1, digest.digest()));
 		} catch (NoSuchAlgorithmException e) {		
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		String query = "Select * FROM Utente Where username = ? AND password = ? ";
@@ -80,7 +82,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 				
 			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		
@@ -105,7 +107,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 				
 			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		return l;
@@ -135,7 +137,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			/*int row =*/preparedStatement.executeUpdate();
 			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 				
 	}
@@ -153,7 +155,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			preparedStatement.executeUpdate();
 			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		
@@ -170,7 +172,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			preparedStatement.executeUpdate();
 			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
 		
 		
