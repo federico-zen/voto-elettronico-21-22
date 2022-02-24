@@ -4,13 +4,14 @@ public class Candidato extends Partecipante {
 	
 	String cognome;
 	
-	public Candidato(String nome,String cognome) {
-		super.nome=nome;
+	public Candidato(int id,String nome,String cognome) {
+		super(id,nome);
 		this.cognome=cognome;
 	}
+	
+	
 	@Override
 	public boolean isPartito() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }
