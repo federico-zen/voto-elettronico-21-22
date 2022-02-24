@@ -1,8 +1,9 @@
 package votoelettronico.model;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class Partito extends Partecipante {
+public class Partito extends Partecipante implements Iterable<Candidato> {
 
 	List<Candidato> candidati ;
 	
@@ -20,5 +21,10 @@ public class Partito extends Partecipante {
 	@Override
 	public boolean isPartito() {
 		return true;
+	}
+
+	@Override
+	public Iterator<Candidato> iterator() {
+		return candidati.iterator();
 	}
 }
