@@ -55,11 +55,11 @@ public class MainController extends Controller{
     			if (u.isElettore()) {
     				//cambia finestra alla sessione di voto
     				Elettore elettore = (Elettore) u;
-        			this.changeView("", null);
+        			this.changeView("", elettore);
     			} else {
     				//cambia finestra alla home del gestore
     				Scrutinatore scrutinatore = (Scrutinatore) u;
-    				this.changeView("", null);
+    				this.changeView("/fxml/home_gestore.fxml", scrutinatore);
     			}
     			
     			

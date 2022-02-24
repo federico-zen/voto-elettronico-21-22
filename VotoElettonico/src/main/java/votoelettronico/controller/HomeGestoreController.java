@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import votoelettronico.bean.Scrutinatore;
+import votoelettronico.logger.VotoLogger;
 
 public class HomeGestoreController extends Controller {
 
@@ -76,7 +78,9 @@ public class HomeGestoreController extends Controller {
 
 	@Override
 	public void init(Object parameters) {
-		// TODO Auto-generated method stub
+		Scrutinatore t = (Scrutinatore) parameters;
+		welcomeLabel.setText("Benvenuto "+ t.getNome());
+		VotoLogger.writeToLog("Loggato : "+ t.getNome() + " come Scrutinatore");
 		
 	}
 
