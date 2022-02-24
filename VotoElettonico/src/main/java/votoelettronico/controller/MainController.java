@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import votoelettronico.bean.Elettore;
+import votoelettronico.bean.Scrutinatore;
 import votoelettronico.bean.Utente;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.factory.DAOFactory;
@@ -51,9 +52,17 @@ public class MainController extends Controller{
     			Alert t = new Alert(AlertType.ERROR, "I dati inseriti non corrispondono ad alcun utente registrato.");
     			t.showAndWait();
     		} else {
-    			//cambia finestra alla sessione di voto
-    			Elettore elettore = (Elettore) u;
-    			this.changeView("", null);
+    			if (u.isElettore()) {
+    				//cambia finestra alla sessione di voto
+    				Elettore elettore = (Elettore) u;
+        			this.changeView("", null);
+    			} else {
+    				//cambia finestra alla home del gestore
+    				Scrutinatore scrutinatore = (Scrutinatore) u;
+    				this.changeView("", null);
+    			}
+    			
+    			
     		}
     	}
     }
