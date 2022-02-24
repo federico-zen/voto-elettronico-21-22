@@ -9,7 +9,20 @@ public class Candidato extends Partecipante {
 		this.cognome=cognome;
 	}
 	
+	public String getCognome() {
+		return cognome;
+	}
+
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
 	
+	@Override
+	public String toString() {
+		return "Candidato [id=" + id + ", nome=" + nome + ", cognome=" + cognome + "]";
+	}
+
 	@Override
 	public boolean isPartito() {
 		return false;

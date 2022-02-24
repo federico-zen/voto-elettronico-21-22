@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class HomeGestoreController {
+public class HomeGestoreController extends Controller {
 
     @FXML
     private Button addCandidatoBtn;
@@ -73,5 +73,11 @@ public class HomeGestoreController {
     void newSessionBtnEvent(ActionEvent event) {
 
     }
+
+	@Override
+	public void init(Object parameters) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
