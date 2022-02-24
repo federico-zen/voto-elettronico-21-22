@@ -1,4 +1,4 @@
-package votoelettronico.bean;
+package votoelettronico.model;
 
 /**
  * Classe astratta che descrive un utente

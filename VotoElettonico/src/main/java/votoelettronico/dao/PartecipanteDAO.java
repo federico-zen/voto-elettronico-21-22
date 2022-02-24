@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import votoelettronico.bean.*;
 import votoelettronico.dbconnection.DBConnection;
 import votoelettronico.logger.VotoLogger;
+import votoelettronico.model.*;
 
 public class PartecipanteDAO implements GenericDAO<Partecipante> {
 

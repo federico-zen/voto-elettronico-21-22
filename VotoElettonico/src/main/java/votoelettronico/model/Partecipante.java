@@ -1,4 +1,4 @@
-package votoelettronico.bean;
+package votoelettronico.model;
 
 public abstract class Partecipante {
 	protected int id;

@@ -10,10 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import votoelettronico.bean.Elettore;
-import votoelettronico.bean.Utente;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.factory.DAOFactory;
+import votoelettronico.model.Elettore;
+import votoelettronico.model.Utente;
 
 public class PresenzaController extends Controller {
 

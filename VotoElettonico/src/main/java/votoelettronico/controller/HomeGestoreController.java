@@ -4,8 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import votoelettronico.bean.Scrutinatore;
 import votoelettronico.logger.VotoLogger;
+import votoelettronico.model.Scrutinatore;
 
 public class HomeGestoreController extends Controller {
 

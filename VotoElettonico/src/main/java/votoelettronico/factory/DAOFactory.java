@@ -1,10 +1,10 @@
 package votoelettronico.factory;
 
-import votoelettronico.bean.Partecipante;
-import votoelettronico.bean.Utente;
 import votoelettronico.dao.GenericDAO;
 import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.UtenteDAO;
+import votoelettronico.model.Partecipante;
+import votoelettronico.model.Utente;
 
 public class DAOFactory {
 	

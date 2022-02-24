@@ -1,4 +1,4 @@
-package votoelettronico.bean;
+package votoelettronico.model;
 
 import java.util.List;
 
