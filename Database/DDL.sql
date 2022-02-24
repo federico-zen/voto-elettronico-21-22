@@ -20,16 +20,11 @@ CREATE TABLE candidato (
 	cognome VARCHAR(255) ,
 	is_p BOOLEAN DEFAULT false,
 	logo BLOB ,
-	PRIMARY KEY (id)
+	idPartito integer,
+	PRIMARY KEY (id),
+	FOREIGN KEY (idPartito) REFERENCES candidato(id)
 );
 
-CREATE TABLE membro(
-	idPartito integer NOT NULL,
-	idCandidato integer NOT NULL,
-	PRIMARY KEY(idPartito,idCandidato),
-	FOREIGN KEY (idPartito) REFERENCES candidato(id),
-	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
-);
 
 CREATE TABLE sessione (
 	id integer NOT NULL AUTO_INCREMENT,
