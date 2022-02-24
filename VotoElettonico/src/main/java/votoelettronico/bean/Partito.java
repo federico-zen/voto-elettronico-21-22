@@ -7,8 +7,8 @@ public class Partito extends Partecipante {
 	
 	
 	//Immagine
-	public Partito(String nome) {
-		super.nome=nome;
+	public Partito(int id,String nome) {
+		super(id,nome);
 	}
 	
 	@Override
