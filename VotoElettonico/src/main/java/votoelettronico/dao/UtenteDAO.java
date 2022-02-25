@@ -142,6 +142,43 @@ public class UtenteDAO implements GenericDAO<Utente>{
 				
 	}
 	
+public void save(Utente t,String psw) {
+		MessageDigest digest;
+		String sha1=null;
+		try {
+			digest = MessageDigest.getInstance("SHA-1");
+			digest.reset();
+			digest.update(psw.getBytes("utf8"));
+			sha1 = String.format("%040x", new BigInteger(1, digest.digest()));
+		
+		
+			String query ="INSERT INTO Utente(nome,cognome,username,password,ruolo) VALUES(?,?,?,?,?);";
+			if(t==null) {
+				throw new NullPointerException();
+			}
+			String ruolo="";
+			if(t.isElettore()) {
+				ruolo="Elettore";
+			}else {
+				ruolo ="Scrutinatore";
+			}
+		
+		
+			DBConnection.getInstance().openConnection();
+			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
+			preparedStatement.setString(1, t.getNome()); 
+			preparedStatement.setString(2, t.getCognome());
+			preparedStatement.setString(3, t.getCodiceFiscale());
+			preparedStatement.setString(4, sha1);
+			preparedStatement.setString(5, ruolo);
+			/*int row =*/preparedStatement.executeUpdate();
+			DBConnection.getInstance().closeConnection();
+		} catch (Exception e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+				
+	}
+	
 	//Modifica l'utente dati i parametri
 	public void update(Utente t, String[] params) {
 		
