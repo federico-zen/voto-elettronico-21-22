@@ -15,26 +15,86 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 
 	@Override
 	public Partecipante get(String id) {
-		return null;
+		Partecipante t =null;
+		
+		String query = "SELECT * FROM candidato WHERE id =?";
+			
+		try {
+			
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				if(rs.getBoolean("is_p")) {
+					t= new Partito(rs.getInt("id"), rs.getString("nome"), getCandidati(rs.getInt("id")));
+				}else {
+					t= new Candidato(rs.getInt("id"), rs.getString("nome"), rs.getString("cognome"));
+				}
+				
+				
+			}
+			
+			
+			
+		}catch(Exception e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		return t;
 	}
 
 	@Override
 	public List<Partecipante> getAll() {		
+		//non utilizzato
 		return null;
 	}
 
 	@Override
-	public void save(Partecipante t) {		
+	public void save(Partecipante t) {
+		//non utilizzato
 	}
 
 	@Override
 	public void update(Partecipante t, String[] params) {
 		
+		
 	}
 
 	@Override
 	public void delete(Partecipante t) {
+			//cancello il partecipante singolo oppure il partito con i suoi membri	
+		String query;
+		try {
+			if(t.isPartito()) { // è Partito
+				PreparedStatement ps;
+				query = "DELETE FROM candidato WHERE idPartito=?";
+				DBConnection.getInstance().openConnection();
+				 ps = DBConnection.getInstance().prepara(query);
+				ps.setInt(1, t.getId());
+				ps.execute();
 				
+				query = "DELETE FROM candidato WHERE id=?";
+				DBConnection.getInstance().openConnection();
+				ps = DBConnection.getInstance().prepara(query);
+				ps.setInt(1, t.getId());
+				ps.execute();
+				
+			}else {
+				int id = t.getId();
+				query = "DELETE FROM candidato WHERE id = ?";
+				
+				DBConnection.getInstance().openConnection();
+				PreparedStatement ps = DBConnection.getInstance().prepara(query);
+				ps.setInt(1, id);
+				ps.execute();
+				
+			}
+			
+			DBConnection.getInstance().closeConnection();
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
 	}
 	
 	public List<Candidato> getCandidati(int id){
@@ -106,6 +166,4 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		return l;
 	}
 	
-	
-
 }
