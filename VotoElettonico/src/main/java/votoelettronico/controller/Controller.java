@@ -13,7 +13,7 @@ public abstract  class Controller {
 	public void changeView(String view,Object parameters) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-        	loader.setLocation(this.getClass().getResource("/fxmf/"+view));
+        	loader.setLocation(this.getClass().getResource("/fxml/"+view));
 			Parent root =  loader.load();
 			Controller c = loader.getController();
 			c.init(parameters);

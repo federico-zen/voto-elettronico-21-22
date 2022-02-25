@@ -69,7 +69,7 @@ public class MainController extends Controller{
 
     @FXML
     void loginPresenza(ActionEvent event) {
-    	this.changeView("/fxml/login_presenza.fxml",List.of(username.getText(),password.getText()));
+    	this.changeView("login_presenza.fxml",List.of(username.getText(),password.getText()));
     }
 
 	@Override
