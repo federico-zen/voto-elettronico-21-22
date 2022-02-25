@@ -48,7 +48,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void addUserBtnEvent(ActionEvent event) {
-
+    	changeView("aggiungi_utente.fxml", null);
     }
 
     @FXML
