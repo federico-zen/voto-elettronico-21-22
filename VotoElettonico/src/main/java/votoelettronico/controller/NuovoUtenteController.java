@@ -16,6 +16,7 @@ import votoelettronico.model.Utente;
 import javafx.scene.control.Alert.AlertType;
 
 public class NuovoUtenteController extends Controller {
+	Scrutinatore logged ;
 
     @FXML
     private Button aggiungiBtn;
@@ -63,12 +64,13 @@ public class NuovoUtenteController extends Controller {
 
     @FXML
     void back(ActionEvent event) {
-    	changeView("home_gestore.fxml", null);
+    	changeView("home_gestore.fxml", logged);
     }
 
 	@Override
 	public void init(Object parameters) {
-		// TODO Auto-generated method stub
+		logged = (Scrutinatore) parameters;
+		
 		
 	}
 

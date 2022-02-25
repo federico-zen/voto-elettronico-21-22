@@ -8,6 +8,8 @@ import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Scrutinatore;
 
 public class HomeGestoreController extends Controller {
+	
+	Scrutinatore logged ;
 
     @FXML
     private Button addCandidatoBtn;
@@ -48,7 +50,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void addUserBtnEvent(ActionEvent event) {
-    	changeView("aggiungi_utente.fxml", null);
+    	changeView("aggiungi_utente.fxml", logged);
     }
 
     @FXML
@@ -78,9 +80,9 @@ public class HomeGestoreController extends Controller {
 
 	@Override
 	public void init(Object parameters) {
-		Scrutinatore t = (Scrutinatore) parameters;
-		welcomeLabel.setText("Benvenuto "+ t.getNome());
-		VotoLogger.writeToLog("Loggato : "+ t.getNome() + " come Scrutinatore");
+		logged = (Scrutinatore) parameters;
+		welcomeLabel.setText("Benvenuto "+ logged.getNome());
+		
 		
 	}
 

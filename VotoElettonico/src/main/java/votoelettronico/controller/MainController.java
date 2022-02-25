@@ -14,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.factory.DAOFactory;
+import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Elettore;
 import votoelettronico.model.Scrutinatore;
 import votoelettronico.model.Utente;
@@ -42,8 +43,6 @@ public class MainController extends Controller{
     		t.showAndWait();
     	}else {
     		String user=username.getText() ,psw=password.getText();
-    		System.out.println("Username : "+user);
-    		System.out.println("Password : "+psw);
     		
     		UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
     		Utente u = dao.get(user, psw);
@@ -59,6 +58,7 @@ public class MainController extends Controller{
     			} else {
     				//cambia finestra alla home del gestore
     				Scrutinatore scrutinatore = (Scrutinatore) u;
+    				VotoLogger.writeToLog("Loggato : "+ scrutinatore.getNome() + " come Scrutinatore");
     				this.changeView("home_gestore.fxml", scrutinatore);
     			}
     			
