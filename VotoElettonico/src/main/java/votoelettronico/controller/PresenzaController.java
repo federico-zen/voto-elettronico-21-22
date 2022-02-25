@@ -34,7 +34,7 @@ public class PresenzaController extends Controller {
 
     @FXML
     void backToMain(ActionEvent event) {
-    	this.changeView("/fxml/main.fxml", List.of(username.getText(),password.getText()));
+    	this.changeView("main.fxml", List.of(username.getText(),password.getText()));
     }
 
     @FXML

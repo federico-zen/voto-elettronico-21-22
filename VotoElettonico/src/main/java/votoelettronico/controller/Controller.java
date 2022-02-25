@@ -10,10 +10,10 @@ public abstract  class Controller {
 	public abstract void init(Object parameters);
 	
 	
-	public void changeView(String path,Object parameters) {
+	public void changeView(String view,Object parameters) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-        	loader.setLocation(this.getClass().getResource(path));
+        	loader.setLocation(this.getClass().getResource("/fxmf/"+view));
 			Parent root =  loader.load();
 			Controller c = loader.getController();
 			c.init(parameters);

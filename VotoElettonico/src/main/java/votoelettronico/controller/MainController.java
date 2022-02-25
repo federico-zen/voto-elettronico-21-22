@@ -59,7 +59,7 @@ public class MainController extends Controller{
     			} else {
     				//cambia finestra alla home del gestore
     				Scrutinatore scrutinatore = (Scrutinatore) u;
-    				this.changeView("/fxml/home_gestore.fxml", scrutinatore);
+    				this.changeView("home_gestore.fxml", scrutinatore);
     			}
     			
     			
