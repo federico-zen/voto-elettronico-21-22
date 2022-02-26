@@ -1,8 +1,6 @@
 package votoelettronico.dao;
 
 import java.sql.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -59,7 +57,33 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 
 	@Override
 	public void update(Partecipante t, String[] params) {
-		//non utilizzato
+		String query;
+		try {
+			if(t.isPartito()) {
+				Partito p = (Partito) t;
+				query = "UPDATE candidato SET nome = ? Where id = ?";
+				
+				DBConnection.getInstance().openConnection();
+				PreparedStatement ps = DBConnection.getInstance().prepara(query);
+				ps.setString(1, p.getNome());
+				ps.setInt(2, p.getId());
+				ps.executeUpdate();			
+				DBConnection.getInstance().closeConnection();
+			}else {
+				Candidato c = (Candidato) t;
+				query = "UPDATE candidato SET nome = ?,cognome = ?  Where id = ?";
+				
+				DBConnection.getInstance().openConnection();
+				PreparedStatement ps = DBConnection.getInstance().prepara(query);
+				ps.setString(1, c.getNome());
+				ps.setString(2, c.getCognome());
+				ps.setInt(3, c.getId());
+				ps.executeUpdate();	
+				DBConnection.getInstance().closeConnection();
+			}
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
 	}
 
 	@Override
