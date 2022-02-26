@@ -19,7 +19,7 @@ CREATE TABLE candidato (
 	nome VARCHAR(255) NOT NULL,
 	cognome VARCHAR(255) ,
 	is_p BOOLEAN DEFAULT false,
-	logo BLOB ,
+	logo LONGBLOB ,
 	idPartito integer,
 	PRIMARY KEY (id),
 	FOREIGN KEY (idPartito) REFERENCES candidato(id)
