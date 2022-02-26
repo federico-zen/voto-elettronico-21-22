@@ -52,4 +52,15 @@ public class DBConnection {
 		
 		return result;
 	}
+	
+	public PreparedStatement prepara(String q,int key) {
+		PreparedStatement result = null;
+		try {
+			result = connection.prepareStatement(q,key);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

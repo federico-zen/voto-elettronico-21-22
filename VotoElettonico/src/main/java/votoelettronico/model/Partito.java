@@ -13,6 +13,7 @@ public class Partito extends Partecipante implements Iterable<Candidato> {
 		this.candidati = candidati;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "Partito [id=" + id + ", nome=" + nome + " Candidati="+candidati.toString()+"]";

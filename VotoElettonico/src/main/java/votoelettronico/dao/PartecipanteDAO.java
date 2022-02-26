@@ -1,11 +1,13 @@
 package votoelettronico.dao;
 
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
+
 
 import votoelettronico.dbconnection.DBConnection;
 import votoelettronico.logger.VotoLogger;
@@ -57,8 +59,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 
 	@Override
 	public void update(Partecipante t, String[] params) {
-		
-		
+		//non utilizzato
 	}
 
 	@Override
@@ -164,6 +165,58 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		}
 		
 		return l;
+	}
+	
+	
+	public void savePartito(Partito p) {
+		
+		String query = "INSERT INTO candidato(nome,is_p) VALUES (?,1)";
+		
+		
+		try {
+			
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query, Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setString(1, p.getNome());
+			ps.executeUpdate();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			
+			while(rs.next()) {
+				p.setId(rs.getInt(1));
+			}
+			
+			//Aggiungo ogni candidato
+			
+			Iterator<Candidato> it = p.iterator();
+			
+			while(it.hasNext()) {
+				Candidato temp = it.next();
+				saveCandidato(temp, p.getId());
+			}
+			DBConnection.getInstance().closeConnection();		
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+	}
+	
+	public void saveCandidato(Candidato c ,int p) {
+		String query = "INSERT INTO candidato(nome,cognome,is_p,idPartito) VALUES (?,?,0,?)";
+				
+		try {
+			
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setString(1, c.getNome());
+			ps.setString(2, c.getNome());
+			ps.setInt(3, p);
+			ps.executeUpdate();
+			DBConnection.getInstance().closeConnection();		
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
 	}
 	
 }
