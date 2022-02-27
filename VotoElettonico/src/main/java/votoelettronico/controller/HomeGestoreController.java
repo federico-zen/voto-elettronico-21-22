@@ -4,27 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Scrutinatore;
 
 public class HomeGestoreController extends Controller {
-	
-	Scrutinatore logged ;
-
-    @FXML
-    private Button addCandidatoBtn;
-
-    @FXML
-    private Button addPartitoBtn;
+	Scrutinatore logged;
 
     @FXML
     private Button addUserBtn;
-
-    @FXML
-    private Button deleteCandidatoBtn;
-
-    @FXML
-    private Button deletePartitoBtn;
 
     @FXML
     private Button deleteUserBtn;
@@ -33,34 +19,17 @@ public class HomeGestoreController extends Controller {
     private Button endSessionBtn;
 
     @FXML
+    private Button gestioneC;
+
+    @FXML
     private Button newSessionBtn;
 
     @FXML
     private Label welcomeLabel;
 
     @FXML
-    void addCandidatoBtnEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void addPartitoBtnEvent(ActionEvent event) {
-
-    }
-
-    @FXML
     void addUserBtnEvent(ActionEvent event) {
     	changeView("aggiungi_utente.fxml", logged);
-    }
-
-    @FXML
-    void deleteCandidatoBtnEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void deletePartitoBtnEvent(ActionEvent event) {
-
     }
 
     @FXML
@@ -74,16 +43,25 @@ public class HomeGestoreController extends Controller {
     }
 
     @FXML
-    void newSessionBtnEvent(ActionEvent event) {
+    void gestioneCandidati(ActionEvent event) {
 
     }
 
-	@Override
-	public void init(Object parameters) {
-		logged = (Scrutinatore) parameters;
-		welcomeLabel.setText("Benvenuto "+ logged.getNome());
-		
-		
-	}
+    @FXML
+    void newSessionBtnEvent(ActionEvent event) {
+
+    }
+    
+    @Override
+    public void init(Object parameters) {
+    	logged = (Scrutinatore) parameters;
+    	welcomeLabel.setText("Benvenuto "+ logged.getNome());
+    	
+    	
+    }
 
 }
+
+
+
+

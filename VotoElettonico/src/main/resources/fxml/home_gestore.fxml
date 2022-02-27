@@ -76,10 +76,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addPartitoBtn" layoutX="41.0" layoutY="88.0" mnemonicParsing="false" onAction="#addPartitoBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Inserisci Partito" />
-                  <Button fx:id="addCandidatoBtn" layoutX="41.0" layoutY="143.0" mnemonicParsing="false" onAction="#addCandidatoBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Inserisci Candidato" />
-                  <Button fx:id="deleteCandidatoBtn" layoutX="41.0" layoutY="258.0" mnemonicParsing="false" onAction="#deleteCandidatoBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Elimina Candidato" />
-                  <Button fx:id="deletePartitoBtn" layoutX="41.0" layoutY="200.0" mnemonicParsing="false" onAction="#deletePartitoBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Elimina Partito" />
+                  <Button fx:id="gestioneC" layoutX="41.0" layoutY="138.0" mnemonicParsing="false" onAction="#gestioneCandidati" prefHeight="35.0" prefWidth="128.0" text="Gestione Candidati" />
                </children>
             </Pane>
             <Pane prefHeight="80.0" prefWidth="640.0">
