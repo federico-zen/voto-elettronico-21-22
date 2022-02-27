@@ -27,7 +27,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				if(rs.getBoolean("is_p")) {
-					t= new Partito(rs.getInt("id"), rs.getString("nome"), getCandidati(rs.getInt("id")));
+					t= new Partito(rs.getInt("id"), rs.getString("nome"),getCandidati(rs.getInt("id")),rs.getBlob("logo"));
 				}else {
 					t= new Candidato(rs.getInt("id"), rs.getString("nome"), rs.getString("cognome"));
 				}
@@ -61,12 +61,13 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		try {
 			if(t.isPartito()) {
 				Partito p = (Partito) t;
-				query = "UPDATE candidato SET nome = ? Where id = ?";
+				query = "UPDATE candidato SET nome = ?,logo = ? Where id = ?";
 				
 				DBConnection.getInstance().openConnection();
 				PreparedStatement ps = DBConnection.getInstance().prepara(query);
 				ps.setString(1, p.getNome());
-				ps.setInt(2, p.getId());
+				ps.setBlob(2, p.getLogo());
+				ps.setInt(3, p.getId());
 				ps.executeUpdate();			
 				DBConnection.getInstance().closeConnection();
 			}else {
@@ -122,7 +123,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		}
 	}
 	
-	public List<Candidato> getCandidati(int id){
+	public List<Candidato> getCandidati(int idPartito){
 		List<Candidato> l = new ArrayList<Candidato>();
 			
 		String query = "SELECT C.id AS id_candidato,C.nome,C.cognome FROM candidato AS P JOIN candidato AS C ON P.id = C.idPartito WHERE C.idPartito= ?";
@@ -130,7 +131,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			
 			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
-			ps.setInt(1, id);
+			ps.setInt(1, idPartito);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				
@@ -156,7 +157,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
-				Partito p = new Partito(rs.getInt("id"),rs.getString("nome"),getCandidati(rs.getInt("id")));
+				Partito p = new Partito(rs.getInt("id"),rs.getString("nome"),getCandidati(rs.getInt("id")),rs.getBlob("logo"));
 				l.add(p);
 			}
 				
@@ -180,7 +181,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			ps.setInt(1, id);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
-				l = new Partito(rs.getInt("id"),rs.getString("nome"),getCandidati(rs.getInt("id")));
+				l = new Partito(rs.getInt("id"),rs.getString("nome"),getCandidati(rs.getInt("id")),rs.getBlob("logo"));
 			}
 				
 			DBConnection.getInstance().closeConnection();		
@@ -194,7 +195,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 	
 	public void savePartito(Partito p) {
 		
-		String query = "INSERT INTO candidato(nome,is_p) VALUES (?,1)";
+		String query = "INSERT INTO candidato(nome,is_p,logo) VALUES (?,1,?)";
 		
 		
 		try {
@@ -203,6 +204,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			PreparedStatement ps = DBConnection.getInstance().prepara(query, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, p.getNome());
+			ps.setBlob(2, p.getLogo());
 			ps.executeUpdate();
 			
 			ResultSet rs = ps.getGeneratedKeys();
