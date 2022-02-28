@@ -16,6 +16,7 @@ import javafx.util.Callback;
 import votoelettronico.dao.GenericDAO;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.factory.DAOFactory;
+import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Scrutinatore;
 import votoelettronico.model.Utente;
 
@@ -48,24 +49,35 @@ public class CancellaUtenteController extends Controller implements Initializabl
     void delete(ActionEvent event) {
     	UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
     	Utente t = listView.getSelectionModel().getSelectedItem();
-    	dao.delete(t);
-    	listView.getItems().remove(t);
-    	listView.refresh();
+    	if(t != null) {
+    		dao.delete(t);
+        	boolean result = listView.getItems().remove(t);
+        	
+        	if(result) {
+        		VotoLogger.writeToLog(t.getCodiceFiscale() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
+        	}
+        	nome.setText("");
+        	cognome.setText("");
+        	username.setText("");
+        	ruolo.setText("");
+    	}
     	
     }
 
     @FXML
     void selected(MouseEvent event) {
     	Utente t = listView.getSelectionModel().getSelectedItem();
-    	
-    	nome.setText(t.getNome());
-    	cognome.setText(t.getCognome());
-    	username.setText(t.getCodiceFiscale());
-    	if(t.isElettore()) {
-    		ruolo.setText("Elettore");
-    	}else {
-    		ruolo.setText("Scrutinatore");
+    	if(t!= null) {
+    		nome.setText(t.getNome());
+        	cognome.setText(t.getCognome());
+        	username.setText(t.getCodiceFiscale());
+        	if(t.isElettore()) {
+        		ruolo.setText("Elettore");
+        	}else {
+        		ruolo.setText("Scrutinatore");
+        	}
     	}
+    	
     }
     
     @FXML
