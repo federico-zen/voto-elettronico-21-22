@@ -44,7 +44,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void gestioneCandidati(ActionEvent event) {
-
+    	changeView("gestione_candidati.fxml", logged);
     }
 
     @FXML
