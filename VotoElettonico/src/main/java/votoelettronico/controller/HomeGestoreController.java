@@ -34,7 +34,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void deleteUserBtnEvent(ActionEvent event) {
-
+    	changeView("cancella_utente.fxml",logged);
     }
 
     @FXML
