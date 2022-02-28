@@ -7,10 +7,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.GenericDAO;
@@ -49,17 +51,24 @@ public class CancellaUtenteController extends Controller implements Initializabl
     void delete(ActionEvent event) {
     	UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
     	Utente t = listView.getSelectionModel().getSelectedItem();
-    	if(t != null) {
-    		dao.delete(t);
-        	boolean result = listView.getItems().remove(t);
-        	
-        	if(result) {
-        		VotoLogger.writeToLog(t.getCodiceFiscale() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
-        	}
-        	nome.setText("");
-        	cognome.setText("");
-        	username.setText("");
-        	ruolo.setText("");
+    	if(t != null ) {
+    		if(t.getCodiceFiscale().equals(logged.getCodiceFiscale())){
+    			Alert x = new Alert(AlertType.ERROR,"Non puoi cancellarti da solo");
+    			x.setHeaderText(null);
+        		x.showAndWait();
+    		}else {
+    			dao.delete(t);
+            	boolean result = listView.getItems().remove(t);
+            	
+            	if(result) {
+            		VotoLogger.writeToLog(t.getCodiceFiscale() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
+            	}
+            	nome.setText("");
+            	cognome.setText("");
+            	username.setText("");
+            	ruolo.setText("");
+    		}
+    		
     	}
     	
     }
