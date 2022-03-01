@@ -49,4 +49,12 @@ public class Partito extends Partecipante implements Iterable<Candidato> {
 	public Iterator<Candidato> iterator() {
 		return candidati.iterator();
 	}
+	
+	public void aggiungiCandidato(Candidato c) {
+		candidati.add(c);
+	}
+	
+	public void rimuoviCandidato(Candidato c) {
+		candidati.remove(c);
+	}
 }
