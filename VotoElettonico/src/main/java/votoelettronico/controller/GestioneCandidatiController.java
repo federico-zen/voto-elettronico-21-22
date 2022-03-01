@@ -46,6 +46,9 @@ public class GestioneCandidatiController extends Controller implements Initializ
 
     @FXML
     private Button updateCandidatoBtn;
+    
+    @FXML
+    private Button backBtn;
 
     @FXML
     private Button updatePartitoBtn;
@@ -59,7 +62,13 @@ public class GestioneCandidatiController extends Controller implements Initializ
     void addPartito(ActionEvent event) {
 
     }
-
+    
+    @FXML
+    void back(ActionEvent event) {
+    	changeView("home_gestore.fxml",logged);
+    }
+    
+    
     @FXML
     void deleteCandidato(ActionEvent event) {
     	PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();

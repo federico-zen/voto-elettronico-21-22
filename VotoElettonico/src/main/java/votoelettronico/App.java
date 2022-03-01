@@ -26,6 +26,7 @@ private  static Scene primaryScene;
 		
 		Scene main = new Scene(content);
         primaryScene = main;
+        primaryStage.setResizable(false);
         primaryStage.setScene(main);
         primaryStage.show();
 		
