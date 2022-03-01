@@ -40,7 +40,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="votoelettronico.controller.GestioneCandidatiController">
    <children>
       <Pane prefHeight="400.0" prefWidth="640.0">
@@ -61,6 +60,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button fx:id="backBtn" layoutX="25.0" layoutY="37.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="100.0" text="Indietro" />
          </children>
       </Pane>
    </children>
