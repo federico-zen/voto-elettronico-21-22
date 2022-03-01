@@ -51,15 +51,17 @@ public class NuovoUtenteController extends Controller {
     	if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || psw.isEmpty()) {
     		Alert t = new Alert(AlertType.INFORMATION,"Inserire tutti i campi");
     		t.showAndWait();
+    	}else {
+    		Utente utente;
+        	if (ruolo.equals("Elettore")) {
+        		utente = new Elettore(nome, cognome, cf);
+        	} else {
+        		utente = new Scrutinatore(nome, cognome, cf);
+        	}
+        	UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
+        	dao.save(utente, psw);
     	}
-    	Utente utente;
-    	if (ruolo.equals("Elettore")) {
-    		utente = new Elettore(nome, cognome, cf);
-    	} else {
-    		utente = new Scrutinatore(nome, cognome, cf);
-    	}
-    	UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
-    	dao.save(utente, psw);
+    	
     }
 
     @FXML
