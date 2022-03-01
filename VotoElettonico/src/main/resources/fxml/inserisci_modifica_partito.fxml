@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="votoelettronico.controller.InserisciModificaPartitoController">
+   <children>
+      <TextField fx:id="nameTF" layoutX="226.0" layoutY="113.0" promptText="inserisci nome" />
+      <Button fx:id="backBtn" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#back" prefWidth="100.0" text="Indietro" />
+      <Button fx:id="saveBtn" layoutX="340.0" layoutY="335.0" mnemonicParsing="false" onAction="#save" prefWidth="100.0" text="Salva" />
+      <Label layoutX="109.0" layoutY="117.0" text="Nome Partito: " />
+      <Button fx:id="addImageBtn" layoutX="225.0" layoutY="245.0" mnemonicParsing="false" onAction="#addImage" text="Inserisci Immagine" />
+      <Label fx:id="addLabel" layoutX="220.0" layoutY="45.0" text="Inserisci Partito">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="logo" fitHeight="100.0" fitWidth="100.0" layoutX="109.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="updateLabel" layoutX="216.0" layoutY="45.0" text="Modifica Partito" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
