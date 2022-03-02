@@ -83,7 +83,7 @@ public class InserisciModificaPartitoController extends Controller {
     	String nome = nameTF.getText();
     	  if (!nome.isEmpty()) {
     		if(p == null && b != null) {
-    	    	p = new Partito(0,nome,new ArrayList<Candidato>(),b);	
+    	    	p = new Partito(nome,new ArrayList<Candidato>(),b);	
     	    	dao.savePartito(p);
     	    	VotoLogger.writeToLog(p.getNome() +" Inserito da " + logged.getNome() + " " + logged.getCognome() );
     	    	

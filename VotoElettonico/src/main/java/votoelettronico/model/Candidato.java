@@ -9,6 +9,11 @@ public class Candidato extends Partecipante {
 		this.cognome=cognome;
 	}
 	
+	public Candidato(String nome,String cognome) {
+		super(nome);
+		this.cognome=cognome;
+	}
+	
 	public String getCognome() {
 		return cognome;
 	}

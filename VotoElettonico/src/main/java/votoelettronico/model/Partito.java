@@ -15,6 +15,11 @@ public class Partito extends Partecipante implements Iterable<Candidato> {
 		this.candidati = candidati;
 		
 	}*/
+	public Partito(String nome,List<Candidato> candidati,Blob logo) {
+		super(nome);
+		this.candidati = candidati;
+		this.logo = logo;
+	}
 	
 	public Partito(int id,String nome,List<Candidato> candidati,Blob logo) {
 		super(id,nome);

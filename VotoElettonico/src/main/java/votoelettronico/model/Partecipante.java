@@ -8,6 +8,11 @@ public abstract class Partecipante {
 		
 	}
 	
+	public Partecipante ( String nome) {
+		
+		this.nome = nome;
+	}
+	
 	public Partecipante (int id, String nome) {
 		this.id = id;
 		this.nome = nome;
