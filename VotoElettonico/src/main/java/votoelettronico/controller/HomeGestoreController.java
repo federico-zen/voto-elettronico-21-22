@@ -49,7 +49,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void newSessionBtnEvent(ActionEvent event) {
-
+    	changeView("creazione_sessione.fxml", logged);
     }
     
     @Override
