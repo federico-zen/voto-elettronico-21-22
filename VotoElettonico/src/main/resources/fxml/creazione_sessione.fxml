@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreazioneSessioneController">
+   <children>
+      <Label layoutX="215.0" layoutY="14.0" text="Creazione Nuova Sessione">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutY="59.0" prefHeight="4.0" prefWidth="700.0" />
+      <Label layoutX="60.0" layoutY="95.0" text="Nome della sessione: " />
+      <Label layoutX="60.0" layoutY="155.0" text="Tipologia di voto:" />
+      <Label layoutX="366.0" layoutY="155.0" text="Tipologia di vittoria:" />
+      <Label layoutX="60.0" layoutY="215.0" text="Domanda referendum:" />
+      <ListView fx:id="partitiAggiuntiLV" layoutX="43.0" layoutY="265.0" prefHeight="150.0" prefWidth="275.0" />
+      <ListView fx:id="partitiInseribiliLV" layoutX="383.0" layoutY="265.0" prefHeight="150.0" prefWidth="275.0" />
+      <Button fx:id="aggiungiBtn" layoutX="336.0" layoutY="305.0" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="30.0" text="🡸" />
+      <Button fx:id="rimuoviBtn" layoutX="336.0" layoutY="350.0" mnemonicParsing="false" onAction="#remove" prefHeight="30.0" prefWidth="30.0" text="🡺" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="125.0" text="Indietro" />
+      <Button fx:id="startBtn" layoutX="558.0" layoutY="461.0" mnemonicParsing="false" onAction="#start" prefHeight="30.0" prefWidth="125.0" text="Crea Sessione" />
+      <Label layoutX="43.0" layoutY="419.0" text="Lista partiti aggiunti" />
+      <Label layoutX="383.0" layoutY="419.0" text="Lista partiti inseribili" />
+      <Separator layoutY="450.0" prefHeight="4.0" prefWidth="700.0" />
+      <TextField fx:id="nomeSessioneTF" layoutX="201.0" layoutY="91.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="domandaTF" disable="true" layoutX="201.0" layoutY="211.0" prefHeight="25.0" prefWidth="458.0" />
+      <ComboBox fx:id="tipologiaVotoCB" layoutX="175.0" layoutY="151.0" onAction="#selectedVoto" prefWidth="170.0" />
+      <ComboBox fx:id="tipologiaVittoriaCB" layoutX="489.0" layoutY="151.0" prefHeight="25.0" prefWidth="170.0" />
+   </children>
+</AnchorPane>
