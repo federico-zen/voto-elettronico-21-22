@@ -124,7 +124,7 @@ public class Sessione implements Iterable<Partito> {
 	/**
 	 * @return the stato
 	 */
-	public boolean isStato() {
+	public boolean getStato() {
 		return stato;
 	}
 

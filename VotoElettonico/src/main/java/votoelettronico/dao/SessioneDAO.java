@@ -3,7 +3,9 @@ package votoelettronico.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -12,7 +14,6 @@ import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Partito;
 import votoelettronico.model.Sessione;
-import votoelettronico.model.Utente;
 
 public class SessioneDAO implements GenericDAO<Sessione>{
 
@@ -29,7 +30,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				s = new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalità_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
+				s = new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalita_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
 			new ArrayList<Partito>());
 			}
 			
@@ -53,6 +54,11 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		}
 		return s;
 	}
+	
+	
+	public Sessione get(int id) {
+		return this.get(Integer.toString(id));
+	}
 
 	@Override
 	public List<Sessione> getAll() {
@@ -65,11 +71,27 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				l.add(new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalità_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
-			new ArrayList<Partito>()));
+				Sessione s =new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalita_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
+						new ArrayList<Partito>());
+			
+				//prendo i singoli partiti che sono sul DB e sono nella Sessione
+				
+				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
+				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
+				ResultSet rs2 = ps2.executeQuery();
+				PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+				
+				while(rs2.next()) {
+					Partito p =dao.getPartito(rs2.getInt("idPartito"));
+					s.addPartito(p);
+				}
+				
+				
+			
+				l.add(s);
 			}
 			
-			//prendo i singoli partiti che sono sul DB e sono nella Sessione
+			
 			
 			
 			DBConnection.getInstance().closeConnection();		
@@ -83,19 +105,53 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 
 	@Override
 	public void save(Sessione t) {
-		// TODO Auto-generated method stub
+		String query = "INSERT INTO sessione (nome,modalita_voto,modalita_vittoria,domanda,stato) VALUES(?,?,?,?,?)";
+		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, t.getNome());
+			ps.setString(2,t.getMod_voto() );
+			ps.setString(3,t.getMod_vittoria());
+			ps.setString(4,t.getDomanda());
+			ps.setBoolean(5, t.getStato());
+			ps.executeUpdate();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			while(rs.next()) {
+				t.setId(rs.getInt(1));
+			}
+			
+			//Inserisci le Partecipazioni dei partiti
+			query = "INSERT INTO partecipazione (idSessione,idCandidato) VALUES (?,?)";
+			
+			
+			for (Partito partito : t) {
+				
+				ps = DBConnection.getInstance().prepara(query);
+				ps.setInt(1, t.getId());
+				ps.setInt(2, partito.getId());
+				ps.executeUpdate();
+				
+			}
+			DBConnection.getInstance().closeConnection();
+		}catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		
 		
 	}
 
 	@Override
 	public void update(Sessione t, String[] params) {
-		// TODO Auto-generated method stub
+		//non usata
 		
 	}
 
 	@Override
 	public void delete(Sessione t) {
-		// TODO Auto-generated method stub
+		//non usato
 		
 	}
 
