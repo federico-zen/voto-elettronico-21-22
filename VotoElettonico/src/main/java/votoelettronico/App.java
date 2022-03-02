@@ -10,6 +10,7 @@ import votoelettronico.logger.VotoLogger;
 public class App extends Application {
 
 private  static Scene primaryScene;
+private static Stage primaryStage;
 	
 	public static void main(String[] args) {
 		
@@ -26,6 +27,8 @@ private  static Scene primaryScene;
 		
 		Scene main = new Scene(content);
         primaryScene = main;
+        this.primaryStage = primaryStage;
+        primaryStage.sizeToScene();
         primaryStage.setResizable(false);
         primaryStage.setScene(main);
         primaryStage.show();
@@ -35,5 +38,10 @@ private  static Scene primaryScene;
 	public static Scene getAppScene() {
         return primaryScene;
     }
+	
+	public static void resize() {
+		primaryStage.sizeToScene();
+		primaryStage.show();
+	}
 
 }
