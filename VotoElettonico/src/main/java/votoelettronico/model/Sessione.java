@@ -125,11 +125,17 @@ public class Sessione implements Iterable<Partito> {
 		this.stato = stato;
 	}
 
-
-
 	@Override
 	public Iterator<Partito> iterator() {
 		return lPartiti.iterator();
+	}
+	
+	public void addPartito(Partito p) {
+		lPartiti.add(p);
+	}
+	
+	public void removePartito(Partito p) {
+		lPartiti.remove(p);
 	}
 	
 }
