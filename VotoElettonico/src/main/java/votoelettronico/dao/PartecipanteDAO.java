@@ -236,7 +236,7 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, c.getNome());
-			ps.setString(2, c.getNome());
+			ps.setString(2, c.getCognome());
 			ps.setInt(3, p);
 			ps.executeUpdate();
 			DBConnection.getInstance().closeConnection();		

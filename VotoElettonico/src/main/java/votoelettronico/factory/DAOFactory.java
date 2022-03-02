@@ -2,8 +2,10 @@ package votoelettronico.factory;
 
 import votoelettronico.dao.GenericDAO;
 import votoelettronico.dao.PartecipanteDAO;
+import votoelettronico.dao.SessioneDAO;
 import votoelettronico.dao.UtenteDAO;
 import votoelettronico.model.Partecipante;
+import votoelettronico.model.Sessione;
 import votoelettronico.model.Utente;
 
 public class DAOFactory {
@@ -28,6 +30,10 @@ public class DAOFactory {
 	
 	public GenericDAO<Partecipante> getPartecipanteDAO() {
 		return new PartecipanteDAO();
+	}
+	
+	public GenericDAO<Sessione> getSessioneDAO() {
+		return new SessioneDAO();
 	}
 	
 	
