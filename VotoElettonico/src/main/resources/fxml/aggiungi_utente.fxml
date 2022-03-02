@@ -64,7 +64,7 @@
                </font>
             </Label>
             <Button fx:id="aggiungiBtn" layoutX="340.0" layoutY="340.0" mnemonicParsing="false" onAction="#aggiungi" prefHeight="25.0" prefWidth="120.0" text="Aggiungi" />
-            <Button fx:id="backBtn" layoutX="180.0" layoutY="340.0" mnemonicParsing="false" onAction="#back" prefWidth="120.0" text="Indientro" />
+            <Button fx:id="backBtn" layoutX="180.0" layoutY="340.0" mnemonicParsing="false" onAction="#back" prefWidth="120.0" text="Indietro" />
             <Label layoutX="140.0" layoutY="244.0" text="Password:" />
             <PasswordField fx:id="pswField" layoutX="280.0" layoutY="240.0" prefHeight="25.0" prefWidth="250.0" />
       </children>
