@@ -245,4 +245,22 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		}
 	}
 	
+	public void updateCandidato(Candidato c , int p) {
+		String query = "UPDATE candidato SET nome = ?, cognome = ? ,idPartito = ? WHERE id = ?";
+		
+		try {
+			
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setString(1, c.getNome());
+			ps.setString(2, c.getCognome());
+			ps.setInt(3, p);
+			ps.setInt(4, c.getId());
+			ps.executeUpdate();
+			DBConnection.getInstance().closeConnection();		
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+	}
+	
 }

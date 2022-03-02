@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.GenericDAO;
 import votoelettronico.dao.PartecipanteDAO;
+import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Candidato;
@@ -72,13 +73,8 @@ public class GestioneCandidatiController extends Controller implements Initializ
     		params.add(p);
     		changeView("inserisci_modifica_candidato.fxml", params);
     	}else {
-    		//Messaggio errore partito
-    	}
-    	/*Candidato c = listViewCandidato.getSelectionModel().getSelectedItem();
-    	if(c != null) {
-    		params.add(c);
-    	}*/
-    	
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare il Partito").showAndWait();
+    	}	
     	
     	
     }
@@ -109,6 +105,8 @@ public class GestioneCandidatiController extends Controller implements Initializ
         		p.rimuoviCandidato(c);
         		VotoLogger.writeToLog(c.getNome() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
         	}
+    	}else {
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare il Candidato").showAndWait();
     	}
     }
 
@@ -127,6 +125,8 @@ public class GestioneCandidatiController extends Controller implements Initializ
         		logo.setImage(null);
         		VotoLogger.writeToLog(p.getNome() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
         	}
+    	}else {
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare il Partito").showAndWait();
     	}
     }
 
@@ -174,6 +174,22 @@ public class GestioneCandidatiController extends Controller implements Initializ
 
     @FXML
     void updateCandidato(ActionEvent event) {
+    	Partito p = listViewPartito.getSelectionModel().getSelectedItem();
+    	List params = new ArrayList();
+    	params.add(logged);
+    	if(p != null) {
+    		params.add(p);
+    		
+    		Candidato c = listViewCandidato.getSelectionModel().getSelectedItem();
+        	if(c != null) {
+        		params.add(c);
+        		changeView("inserisci_modifica_candidato.fxml", params);
+        	}else {
+        		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare il Candidato").showAndWait();
+        	}
+    	}else {
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare il Partito").showAndWait();
+    	}
     	
     	
     }

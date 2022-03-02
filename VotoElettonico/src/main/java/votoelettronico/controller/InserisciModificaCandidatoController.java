@@ -54,15 +54,25 @@ public class InserisciModificaCandidatoController extends Controller implements 
     @FXML
     void save(ActionEvent event) {
     	PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+    	
     	String nome = nomeTF.getText();
     	String cognome = cognomeTF.getText();
+    	Partito selected = listaPartiti.getSelectionModel().getSelectedItem();
+    
     	
-    	if(c == null) {
-    		//inserisci nel partito corretto
+    	if(c!= null) {
+    		c.setNome(nome);
+    		c.setCognome(cognome);
+    		dao.updateCandidato(c, selected.getId());
+    		System.out.println("Modificato");
     	}else {
-    		//update di un partito
+    		System.out.println("Inserito");
+    		dao.saveCandidato(new Candidato(nome, cognome), selected.getId());
     	}
     	
+    	
+    	
+    	changeView("gestione_candidati.fxml", logged);
     }
 
 	@Override
@@ -75,7 +85,6 @@ public class InserisciModificaCandidatoController extends Controller implements 
 			case 2:
 				p = (Partito) l.get(1);
 				listaPartiti.getSelectionModel().select(p);
-				listaPartiti.setPromptText(p.getNome());
 				addLabel.setVisible(true);
 				updateLabel.setVisible(false);
 				break;
@@ -87,7 +96,9 @@ public class InserisciModificaCandidatoController extends Controller implements 
 				cognomeTF.setText(c.getCognome());
 				addLabel.setVisible(false);
 				updateLabel.setVisible(true);
+				
 				break;
+				
 			}
 		}
 	}
