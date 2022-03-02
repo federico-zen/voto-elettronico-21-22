@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import votoelettronico.dao.UtenteDAO;
+import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Elettore;
@@ -39,8 +40,7 @@ public class MainController extends Controller{
     	
 
     	if(username.getText().isEmpty() || password.getText().isEmpty() ) {
-    		Alert t = new Alert(AlertType.INFORMATION,"Inserire tutti i campi");
-    		t.showAndWait();
+    		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Inserire tutti i campi").showAndWait();
     	}else {
     		String user=username.getText() ,psw=password.getText();
     		
@@ -48,8 +48,7 @@ public class MainController extends Controller{
     		Utente u = dao.get(user, psw);
     		if (Objects.isNull(u)) {
     			//messaggio di errore e l'utente reinserisce i dati
-    			Alert t = new Alert(AlertType.ERROR, "I dati inseriti non corrispondono ad alcun utente registrato.");
-    			t.showAndWait();
+    			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "I dati inseriti non corrispondono ad alcun utente registrato").showAndWait();
     		} else {
     			if (u.isElettore()) {
     				//cambia finestra alla sessione di voto

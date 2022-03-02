@@ -9,6 +9,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import votoelettronico.dao.UtenteDAO;
+import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Elettore;
 import votoelettronico.model.Scrutinatore;
@@ -49,8 +50,7 @@ public class NuovoUtenteController extends Controller {
     	String psw = pswField.getText();
     	
     	if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || psw.isEmpty()) {
-    		Alert t = new Alert(AlertType.INFORMATION,"Inserire tutti i campi");
-    		t.showAndWait();
+    		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Inserire tutti i campi").showAndWait();
     	}else {
     		Utente utente;
         	if (ruolo.equals("Elettore")) {
