@@ -16,6 +16,16 @@ public class Sessione implements Iterable<Partito> {
 	public Sessione() {
 		
 	}
+	public Sessione( String nome, String mod_voto, String mod_vittoria, String domanda, boolean stato,
+			List<Partito> lPartiti) {
+		super();
+		this.nome = nome;
+		this.mod_voto = mod_voto;
+		this.mod_vittoria = mod_vittoria;
+		this.domanda = domanda;
+		this.stato = stato;
+		this.lPartiti = lPartiti;
+	}
 	
 	
 
@@ -136,6 +146,12 @@ public class Sessione implements Iterable<Partito> {
 	
 	public void removePartito(Partito p) {
 		lPartiti.remove(p);
+	}
+
+	@Override
+	public String toString() {
+		return "Sessione [id=" + id + ", nome=" + nome + ", mod_voto=" + mod_voto + ", mod_vittoria=" + mod_vittoria
+				+ ", domanda=" + domanda + ", stato=" + stato + ", lPartiti=" + lPartiti + "]";
 	}
 	
 }
