@@ -4,8 +4,6 @@ import java.sql.Blob;
 import java.util.Iterator;
 import java.util.List;
 
-import javafx.scene.image.Image;
-
 public class Partito extends Partecipante implements Iterable<Candidato> {
 	
 	//Immagine

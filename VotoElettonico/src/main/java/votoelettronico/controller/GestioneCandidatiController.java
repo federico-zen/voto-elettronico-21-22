@@ -1,15 +1,23 @@
 package votoelettronico.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.GenericDAO;
@@ -25,7 +33,9 @@ import votoelettronico.model.Utente;
 public class GestioneCandidatiController extends Controller implements Initializable{
 	
 	Scrutinatore logged;
-
+	@FXML
+	private ImageView logo;
+	
     @FXML
     private Button addCandidatoBtn;
 
@@ -55,12 +65,27 @@ public class GestioneCandidatiController extends Controller implements Initializ
 
     @FXML
     void addCandidato(ActionEvent event) {
-
+    	Partito p = listViewPartito.getSelectionModel().getSelectedItem();
+    	List params = new ArrayList();
+    	params.add(logged);
+    	if(p != null) {
+    		params.add(p);
+    		changeView("inserisci_modifica_candidato.fxml", params);
+    	}else {
+    		//Messaggio errore partito
+    	}
+    	/*Candidato c = listViewCandidato.getSelectionModel().getSelectedItem();
+    	if(c != null) {
+    		params.add(c);
+    	}*/
+    	
+    	
+    	
     }
 
     @FXML
     void addPartito(ActionEvent event) {
-
+    	changeView("inserisci_modifica_partito.fxml",List.of(logged));
     }
     
     @FXML
@@ -99,6 +124,7 @@ public class GestioneCandidatiController extends Controller implements Initializ
         	if(result) {
         		dao.delete(p);
         		listViewCandidato.getItems().clear();
+        		logo.setImage(null);
         		VotoLogger.writeToLog(p.getNome() +" Eliminato da " + logged.getNome() + " " + logged.getCognome() );
         	}
     	}
@@ -135,24 +161,39 @@ public class GestioneCandidatiController extends Controller implements Initializ
     				listViewCandidato.getItems().add(it.next());
     			}
     			
+    			try {
+    				logo.setImage(new Image(p.getLogo().getBinaryStream()));
+    			} catch (SQLException e) {
+    				VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+    			}
+    			
     		}
-    	
+    		
     	
     }
 
     @FXML
     void updateCandidato(ActionEvent event) {
-
+    	
+    	
     }
 
     @FXML
     void updatePartito(ActionEvent event) {
-
+    	Partito p = listViewPartito.getSelectionModel().getSelectedItem();
+    	if(p!= null) {
+    		changeView("inserisci_modifica_partito.fxml",List.of(logged,p));
+    	}else{
+    		Alert t = new Alert(AlertType.ERROR, "Seleziona il partito da modificare");
+    		t.setHeaderText(null);
+  			t.showAndWait();
+    	}
     }
     
     @Override
 	public void init(Object parameters) {
 		logged = (Scrutinatore) parameters;
+		
 		
 	}
 
