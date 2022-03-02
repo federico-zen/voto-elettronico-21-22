@@ -17,7 +17,7 @@ import votoelettronico.model.Utente;
 import javafx.scene.control.Alert.AlertType;
 
 public class NuovoUtenteController extends Controller {
-	Scrutinatore logged ;
+	Scrutinatore logged;
 
     @FXML
     private Button aggiungiBtn;

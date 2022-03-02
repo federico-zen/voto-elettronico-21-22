@@ -6,8 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import votoelettronico.model.Scrutinatore;
 
 public class CreazioneSessioneController extends Controller {
+	
+	Scrutinatore logged;
 
     @FXML
     private Button aggiungiBtn;
@@ -46,7 +49,7 @@ public class CreazioneSessioneController extends Controller {
 
     @FXML
     void back(ActionEvent event) {
-
+    	changeView("home_gestore.fxml", logged);
     }
 
     @FXML
@@ -66,8 +69,7 @@ public class CreazioneSessioneController extends Controller {
 
 	@Override
 	public void init(Object parameters) {
-		// TODO Auto-generated method stub
-		
+		logged = (Scrutinatore) parameters;
 	}
 
 }
