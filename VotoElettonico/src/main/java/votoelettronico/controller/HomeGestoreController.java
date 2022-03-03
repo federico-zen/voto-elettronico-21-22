@@ -39,7 +39,7 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     void endSessionBtnEvent(ActionEvent event) {
-
+    	changeView("termina_sessione.fxml",logged);
     }
 
     @FXML
