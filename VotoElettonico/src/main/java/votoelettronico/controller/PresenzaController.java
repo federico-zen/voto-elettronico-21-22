@@ -63,7 +63,7 @@ public class PresenzaController extends Controller {
     				AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Il CF inserito non corrisponde ad alcun elettore registrato").showAndWait();
     			} else {
     				//cambia finestra alla sessione di voto
-    				this.changeView("", null);
+    				this.changeView("home_elettore.fxml", elettore);
     			}
     			
     		}
