@@ -22,7 +22,7 @@ CREATE TABLE candidato (
 	logo LONGBLOB ,
 	idPartito integer,
 	PRIMARY KEY (id),
-	FOREIGN KEY (idPartito) REFERENCES candidato(id)
+	FOREIGN KEY (idPartito) REFERENCES candidato(id) ON DELETE CASCADE
 );
 
 
@@ -40,8 +40,8 @@ CREATE TABLE partecipazione (
 	idSessione integer NOT NULL,
 	idCandidato integer NOT NULL,
 	PRIMARY KEY(idSessione,idCandidato),
-	FOREIGN KEY (idSessione) REFERENCES sessione(id),
-	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
+	FOREIGN KEY (idSessione) REFERENCES sessione(id) ON DELETE CASCADE,
+	FOREIGN KEY (idCandidato) REFERENCES candidato(id) ON DELETE CASCADE
 
 );
 /*L'utente Vota nella sessione*/
@@ -49,8 +49,8 @@ CREATE TABLE votazione(
 	idUtente varchar(255) NOT NULL,
 	idSessione integer NOT NULL,
 	PRIMARY KEY (idUtente,idSessione),
-	FOREIGN KEY (idSessione) REFERENCES sessione(id),
-	FOREIGN KEY (idUtente) REFERENCES utente(username)
+	FOREIGN KEY (idSessione) REFERENCES sessione(id) ON DELETE CASCADE,
+	FOREIGN KEY (idUtente) REFERENCES utente(username) ON DELETE CASCADE
 );
 
 /*Voto Utente*/
@@ -61,8 +61,8 @@ CREATE TABLE voto (
 	risposta BOOLEAN ,
 	idCandidato integer ,	
 	PRIMARY KEY (id),
-	FOREIGN KEY (idSessione) REFERENCES sessione(id),
-	FOREIGN KEY (idCandidato) REFERENCES candidato(id)
+	FOREIGN KEY (idSessione) REFERENCES sessione(id) ON DELETE CASCADE,
+	FOREIGN KEY (idCandidato) REFERENCES candidato(id) ON DELETE CASCADE
 	
 );
 
