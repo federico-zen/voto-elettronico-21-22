@@ -245,4 +245,19 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		return l;
 	}
 
+
+	public void closeSession(Sessione s) {
+		String query ="UPDATE sessione SET stato = 0 WHERE id = ?";
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setInt(1, s.getId());
+			ps.executeUpdate();
+			DBConnection.getInstance().closeConnection();
+		}catch (SQLException e){
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+	}
+
 }
