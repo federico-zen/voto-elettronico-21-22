@@ -17,6 +17,9 @@ public class HomeGestoreController extends Controller {
 
     @FXML
     private Button endSessionBtn;
+    
+    @FXML
+    private Button logOutBtn;
 
     @FXML
     private Button gestioneC;
@@ -50,6 +53,11 @@ public class HomeGestoreController extends Controller {
     @FXML
     void newSessionBtnEvent(ActionEvent event) {
     	changeView("creazione_sessione.fxml", logged);
+    }
+    
+    @FXML
+    void logOut(ActionEvent event) {
+    	changeView("main.fxml", null);
     }
     
     @Override

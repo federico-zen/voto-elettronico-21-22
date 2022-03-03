@@ -54,6 +54,7 @@
                   <Button fx:id="newSessionBtn" layoutX="41.0" layoutY="143.0" mnemonicParsing="false" onAction="#newSessionBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Crea Nuova Sessione" />
                   <Button fx:id="endSessionBtn" layoutX="41.0" layoutY="197.0" mnemonicParsing="false" onAction="#endSessionBtnEvent" prefHeight="25.0" prefWidth="128.0" text="Termina Sessione" />
                   <Separator layoutX="5.0" layoutY="2.0" prefHeight="4.0" prefWidth="630.0" />
+                  <Separator layoutY="250.0" prefHeight="4.0" prefWidth="640.0" />
                </children>
             </Pane>
             <Pane layoutX="215.0" layoutY="90.0" prefHeight="310.0" prefWidth="210.0">
@@ -65,8 +66,9 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Separator layoutX="-3.0" layoutY="9.0" orientation="VERTICAL" prefHeight="297.0" prefWidth="6.0" />
-                  <Separator layoutX="207.0" layoutY="9.0" orientation="VERTICAL" prefHeight="297.0" prefWidth="6.0" />
+                  <Separator layoutX="-3.0" layoutY="9.0" orientation="VERTICAL" prefHeight="240.0" prefWidth="4.0" />
+                  <Separator layoutX="207.0" layoutY="9.0" orientation="VERTICAL" prefHeight="240.0" prefWidth="4.0" />
+                  <Button fx:id="logOutBtn" layoutX="43.0" layoutY="266.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="125.0" text="Log out" />
                </children>
             </Pane>
             <Pane layoutX="430.0" layoutY="90.0" prefHeight="310.0" prefWidth="210.0">
@@ -76,7 +78,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="gestioneC" layoutX="41.0" layoutY="138.0" mnemonicParsing="false" onAction="#gestioneCandidati" prefHeight="35.0" prefWidth="128.0" text="Gestione Candidati" />
+                  <Button fx:id="gestioneC" layoutX="41.0" layoutY="143.0" mnemonicParsing="false" onAction="#gestioneCandidati" prefHeight="25.0" prefWidth="128.0" text="Gestione Candidati" />
                </children>
             </Pane>
             <Pane prefHeight="80.0" prefWidth="640.0">

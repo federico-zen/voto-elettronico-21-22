@@ -60,6 +60,7 @@ public class NuovoUtenteController extends Controller {
         	}
         	UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
         	dao.save(utente, psw);
+        	changeView("home_gestore.fxml", logged);
     	}
     	
     }
