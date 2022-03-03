@@ -15,7 +15,6 @@ import votoelettronico.dao.SessioneDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Elettore;
-import votoelettronico.model.Partito;
 import votoelettronico.model.Sessione;
 
 public class HomeElettoreController extends Controller implements Initializable {
