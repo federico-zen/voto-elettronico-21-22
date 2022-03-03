@@ -154,5 +154,89 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		//non usato
 		
 	}
+	
+	public List<Sessione> getAllActive() {
+		List<Sessione> l = new ArrayList<>();
+		String query ="SELECT * FROM sessione WHERE stato = 1";
+		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Sessione s =new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalita_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
+						new ArrayList<Partito>());
+			
+				//prendo i singoli partiti che sono sul DB e sono nella Sessione
+				
+				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
+				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
+				ResultSet rs2 = ps2.executeQuery();
+				PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+				
+				while(rs2.next()) {
+					Partito p =dao.getPartito(rs2.getInt("idPartito"));
+					s.addPartito(p);
+				}
+				
+				
+			
+				l.add(s);
+			}
+			
+			
+			
+			
+			DBConnection.getInstance().closeConnection();		
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		
+		return l;
+	}
+	
+	public List<Sessione> getAllClosed() {
+		List<Sessione> l = new ArrayList<>();
+		String query ="SELECT * FROM sessione WHERE stato = 0";
+		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Sessione s =new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalita_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
+						new ArrayList<Partito>());
+			
+				//prendo i singoli partiti che sono sul DB e sono nella Sessione
+				
+				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
+				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
+				ResultSet rs2 = ps2.executeQuery();
+				PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+				
+				while(rs2.next()) {
+					Partito p =dao.getPartito(rs2.getInt("idPartito"));
+					s.addPartito(p);
+				}
+				
+				
+			
+				l.add(s);
+			}
+			
+			
+			
+			
+			DBConnection.getInstance().closeConnection();		
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		
+		return l;
+	}
 
 }
