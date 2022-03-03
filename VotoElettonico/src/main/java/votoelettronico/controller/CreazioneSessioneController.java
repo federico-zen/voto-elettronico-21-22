@@ -20,6 +20,7 @@ import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Candidato;
 import votoelettronico.model.Partito;
 import votoelettronico.model.Scrutinatore;
+import votoelettronico.model.Sessione;
 
 public class CreazioneSessioneController extends Controller implements Initializable{
 	
@@ -58,12 +59,19 @@ public class CreazioneSessioneController extends Controller implements Initializ
     @FXML
     void add(ActionEvent event) {
     	Partito p = partitiInseribiliLV.getSelectionModel().getSelectedItem();
-    	if(p != null) {
-    		partitiAggiuntiLV.getItems().add(p);
-    		partitiInseribiliLV.getItems().remove(p);
-    	}else {
-    		AlertFactory.getInstance().getAlert(AlertType.ERROR, "Seleziona il partito da inserire").showAndWait();
-    	}
+    	if(partitiInseribiliLV.getItems().size()!=0) {
+    		if(p != null) {
+        		
+        		partitiAggiuntiLV.getItems().add(p);
+        		partitiInseribiliLV.getItems().remove(p);
+        	}else {
+        		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona il partito da inserire").showAndWait();
+        	}
+		}else {
+			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Nessun Partito !").showAndWait();
+		}
+    	
+    	
     }
 
     @FXML
@@ -74,12 +82,17 @@ public class CreazioneSessioneController extends Controller implements Initializ
     @FXML
     void remove(ActionEvent event) {
     	Partito p = partitiAggiuntiLV.getSelectionModel().getSelectedItem();
-    	if(p != null) {
-    		partitiInseribiliLV.getItems().add(p);
-    		partitiAggiuntiLV.getItems().remove(p);
+    	if(partitiAggiuntiLV.getItems().size() !=0) {
+    		if(p != null) {
+        		partitiInseribiliLV.getItems().add(p);
+        		partitiAggiuntiLV.getItems().remove(p);
+        	}else {
+        		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona il partito da rimuovere").showAndWait();
+        	}
     	}else {
-    		AlertFactory.getInstance().getAlert(AlertType.ERROR, "Seleziona il partito da rimuovere").showAndWait();
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Nessun Partito !").showAndWait();
     	}
+    	
     }
 
     @FXML
@@ -108,7 +121,16 @@ public class CreazioneSessioneController extends Controller implements Initializ
 
     @FXML
     void start(ActionEvent event) {
-
+    	Sessione s = null;
+    	
+    	if(partitiAggiuntiLV.getItems().size()>=2) {
+    		
+    		//Crea Sessione
+    	}else {
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona Più Partiti !").showAndWait();
+    	}
+    	
+    	
     }
 
 	@Override
@@ -119,12 +141,14 @@ public class CreazioneSessioneController extends Controller implements Initializ
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		setup();
+		setupListe();
+		tipologiaVotoCB.getItems().setAll(List.of("Ordinale","Categorico","Categorico-Preferenze","Referendum"));		
+		tipologiaVotoCB.getSelectionModel().selectFirst();
 		
 		
 	}
 	
-	private void setup() {
+	private void setupListe() {
 		
 		//Liste
 		PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
@@ -170,8 +194,7 @@ public class CreazioneSessioneController extends Controller implements Initializ
 		    }
 		});
 		
-		tipologiaVotoCB.getItems().setAll(List.of("Ordinale","Categorico","Categorico-Preferenze","Referendum"));		
-		tipologiaVotoCB.getSelectionModel().selectFirst();
+		
 		
 	}
 
