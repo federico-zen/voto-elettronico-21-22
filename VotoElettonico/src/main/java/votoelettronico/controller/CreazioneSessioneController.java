@@ -125,34 +125,42 @@ public class CreazioneSessioneController extends Controller implements Initializ
     void start(ActionEvent event) {
     	Sessione s = null;
     	
-    	if(partitiAggiuntiLV.getItems().size()>=2) {
-    		
-    		//Crea Sessione
-    		
-    		//controlli sull'input da fare
-    		String nome = nomeSessioneTF.getText();
-    		String domanda = domandaTF.getText();
-    		String mVoto = tipologiaVotoCB.getSelectionModel().getSelectedItem();
-    		String mVittoria= tipologiaVittoriaCB.getSelectionModel().getSelectedItem();
-    		List<Partito> partecipanti = partitiAggiuntiLV.getItems();
-    		
-    		if(mVoto.equalsIgnoreCase("referendum")) {
-    			s=new Sessione(nome, mVoto, mVittoria, domanda, true, new ArrayList<Partito>()); //true vuole dire attiva
-        		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
-        		dao.save(s);
-        		
-    		}else {
-    			s=new Sessione(nome, mVoto, mVittoria, domanda, true, partecipanti); //true vuole dire attiva
-        		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
-        		dao.save(s);
-        		
+    	//Crea Sessione
+		
+		String nome = nomeSessioneTF.getText();
+		String domanda = domandaTF.getText();
+		String mVoto = tipologiaVotoCB.getSelectionModel().getSelectedItem();
+		String mVittoria= tipologiaVittoriaCB.getSelectionModel().getSelectedItem();
+		List<Partito> partecipanti = partitiAggiuntiLV.getItems();
+		
+		//controlli sull'input
+		if (nome.isEmpty()) {
+			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Riempire il campo del nome").showAndWait();
+		} else if (mVoto.isEmpty() || mVittoria.isEmpty()) {
+			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare una scelta nei campi di tipologia voto e vittoria").showAndWait();
+		} else {
+			if(mVoto.equalsIgnoreCase("referendum")) {
+				if (!domanda.isEmpty()) {
+					s=new Sessione(nome, mVoto, mVittoria, domanda, true, new ArrayList<Partito>()); //true vuole dire attiva
+	        		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+	        		dao.save(s);
+	        		changeView("home_gestore.fxml",logged);
+				} else {
+					AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Riempire il campo della domanda").showAndWait();
+				}
+    		} else {
+    			if(partitiAggiuntiLV.getItems().size()>=2) {
+    				s=new Sessione(nome, mVoto, mVittoria, domanda, true, partecipanti); //true vuole dire attiva
+            		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+            		dao.save(s);
+            		changeView("home_gestore.fxml",logged);
+    	    	} else {
+    	    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona Più Partiti !").showAndWait();
+    	    	}
     		}
+		}
     	
-    		
-    		
-    	}else {
-    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona Più Partiti !").showAndWait();
-    	}
+    	
     	
     	
     }

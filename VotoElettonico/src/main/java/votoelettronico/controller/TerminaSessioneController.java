@@ -51,7 +51,7 @@ public class TerminaSessioneController extends Controller implements Initializab
     		changeView("termina_sessione.fxml", logged);
     		
     	}else {
-    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona una sessione da terminare");
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona una sessione da terminare").showAndWait();
     	}
     }
 
