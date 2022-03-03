@@ -1,6 +1,7 @@
 package votoelettronico.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -42,7 +43,14 @@ public class HomeElettoreController extends Controller implements Initializable 
     	
     	if(s!=null) {
     		String modVoto = s.getMod_voto();
-    		
+    		switch (modVoto) {
+			case "Referendum":
+				changeView("referendum.fxml", List.of(logged,s));
+				break;
+
+			default:
+				break;
+			}
     		//cambiare a seconda della modalità di voto
     		
     	}else {
@@ -53,11 +61,13 @@ public class HomeElettoreController extends Controller implements Initializable 
 	@Override
 	public void init(Object parameters) {
 		logged = (Elettore) parameters;
+		SessioneDAO dao =(SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+		sessioniLV.getItems().setAll(dao.getAllActiveNotVoted(logged.getCodiceFiscale()));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		SessioneDAO dao =(SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+		
 		sessioniLV.setCellFactory(new Callback<ListView<Sessione>, ListCell<Sessione>>() {
 
 		    @Override
@@ -67,7 +77,7 @@ public class HomeElettoreController extends Controller implements Initializable 
 		            public void updateItem(Sessione item, boolean empty) {
 		                super.updateItem(item, empty);
 		                if(item!= null) {
-		                	setText(item.getNome());
+		                	setText(item.getNome()+" - "+ item.getMod_voto() + " - " + item.getMod_vittoria());
 		                }else {
 		                	setText(null);
 		                }
@@ -79,7 +89,7 @@ public class HomeElettoreController extends Controller implements Initializable 
 		});
 		
 		
-		sessioniLV.getItems().setAll(dao.getAllActive());
+		
 		
 	}
 
