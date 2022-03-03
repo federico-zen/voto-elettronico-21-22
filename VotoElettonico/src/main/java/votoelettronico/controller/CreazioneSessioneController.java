@@ -1,6 +1,7 @@
 package votoelettronico.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -135,11 +136,19 @@ public class CreazioneSessioneController extends Controller implements Initializ
     		String mVittoria= tipologiaVittoriaCB.getSelectionModel().getSelectedItem();
     		List<Partito> partecipanti = partitiAggiuntiLV.getItems();
     		
+    		if(mVoto.equalsIgnoreCase("referendum")) {
+    			s=new Sessione(nome, mVoto, mVittoria, domanda, true, new ArrayList<Partito>()); //true vuole dire attiva
+        		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+        		dao.save(s);
+        		
+    		}else {
+    			s=new Sessione(nome, mVoto, mVittoria, domanda, true, partecipanti); //true vuole dire attiva
+        		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+        		dao.save(s);
+        		
+    		}
+    	
     		
-    		
-    		s=new Sessione(nome, mVoto, mVittoria, domanda, true, partecipanti); //true vuole dire attiva
-    		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
-    		dao.save(s);
     		
     	}else {
     		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona Più Partiti !").showAndWait();
@@ -159,8 +168,8 @@ public class CreazioneSessioneController extends Controller implements Initializ
 		setupListe();
 		tipologiaVotoCB.getItems().setAll(List.of("Ordinale","Categorico","Categorico-Preferenze","Referendum"));		
 		tipologiaVotoCB.getSelectionModel().selectFirst();
-		
-		
+		tipologiaVittoriaCB.getItems().setAll(List.of("Maggioranza","Maggioranza-Assoluta"));
+		tipologiaVittoriaCB.getSelectionModel().selectFirst();
 	}
 	
 	private void setupListe() {

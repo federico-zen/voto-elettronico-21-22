@@ -34,18 +34,20 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			new ArrayList<Partito>());
 			}
 			
-			
-			//prendo i singoli partiti che sono sul DB e sono nella Sessione
-			
-			query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
-			ps = DBConnection.getInstance().prepara(query);
-			rs = ps.executeQuery();
-			PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
-			
-			while(rs.next()) {
-				Partito p =dao.getPartito(rs.getInt("idPartito"));
-				s.addPartito(p);
+			if(!rs.getString("modalita_voto").equalsIgnoreCase("referendum")) {
+				//prendo i singoli partiti che sono sul DB e sono nella Sessione
+				DBConnection.getInstance().openConnection();
+				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
+				ps = DBConnection.getInstance().prepara(query);
+				rs = ps.executeQuery();
+				PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+				
+				while(rs.next()) {
+					Partito p =dao.getPartito(rs.getInt("idPartito"));
+					s.addPartito(p);
+				}
 			}
+			
 			
 			
 			DBConnection.getInstance().closeConnection();		
@@ -73,22 +75,26 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			while(rs.next()) {
 				Sessione s =new Sessione(rs.getInt("id"), rs.getString("nome"), rs.getString("modalita_voto"), rs.getString("modalita_vittoria"), rs.getString("domanda"), rs.getBoolean("stato"),
 						new ArrayList<Partito>());
-			
-				//prendo i singoli partiti che sono sul DB e sono nella Sessione
 				
-				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
-				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
-				ResultSet rs2 = ps2.executeQuery();
-				PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
+				if(!rs.getString("modalita_voto").equalsIgnoreCase("referendum")) {
+					//prendo i singoli partiti che sono sul DB e sono nella Sessione
+					
+					
+					DBConnection.getInstance().openConnection();
+					query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id ";
+					PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
+					ResultSet rs2 = ps2.executeQuery();
+					PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 				
-				while(rs2.next()) {
-					Partito p =dao.getPartito(rs2.getInt("idPartito"));
-					s.addPartito(p);
+					while(rs2.next()) {
+						Partito p =dao.getPartito(rs2.getInt("idPartito"));
+						s.addPartito(p);
+					}
+				
 				}
-				
-				
 			
 				l.add(s);
+				
 			}
 			
 			
@@ -169,7 +175,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 						new ArrayList<Partito>());
 			
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				
+				DBConnection.getInstance().openConnection();
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 				ResultSet rs2 = ps2.executeQuery();
@@ -211,7 +217,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 						new ArrayList<Partito>());
 			
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				
+				DBConnection.getInstance().openConnection();
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 				ResultSet rs2 = ps2.executeQuery();
