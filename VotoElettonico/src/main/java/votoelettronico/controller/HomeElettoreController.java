@@ -38,7 +38,7 @@ public class HomeElettoreController extends Controller implements Initializable 
     @FXML
     void vaiAlVoto(ActionEvent event) {
     	Sessione s = null;
-    	
+    	s = sessioniLV.getSelectionModel().getSelectedItem();
     	
     	if(s!=null) {
     		String modVoto = s.getMod_voto();
