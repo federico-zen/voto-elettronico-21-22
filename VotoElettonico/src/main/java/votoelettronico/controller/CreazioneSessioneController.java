@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import votoelettronico.dao.PartecipanteDAO;
+import votoelettronico.dao.SessioneDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Candidato;
@@ -126,6 +127,20 @@ public class CreazioneSessioneController extends Controller implements Initializ
     	if(partitiAggiuntiLV.getItems().size()>=2) {
     		
     		//Crea Sessione
+    		
+    		//controlli sull'input da fare
+    		String nome = nomeSessioneTF.getText();
+    		String domanda = domandaTF.getText();
+    		String mVoto = tipologiaVotoCB.getSelectionModel().getSelectedItem();
+    		String mVittoria= tipologiaVittoriaCB.getSelectionModel().getSelectedItem();
+    		List<Partito> partecipanti = partitiAggiuntiLV.getItems();
+    		
+    		
+    		
+    		s=new Sessione(nome, mVoto, mVittoria, domanda, true, partecipanti); //true vuole dire attiva
+    		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+    		dao.save(s);
+    		
     	}else {
     		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona Più Partiti !").showAndWait();
     	}
