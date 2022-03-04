@@ -59,6 +59,7 @@ CREATE TABLE voto (
 	idSessione integer NOT NULL ,
 	ordine integer , 
 	risposta BOOLEAN ,
+	scheda_bianca BOOLEAN,
 	idCandidato integer ,	
 	PRIMARY KEY (id),
 	FOREIGN KEY (idSessione) REFERENCES sessione(id) ON DELETE CASCADE,

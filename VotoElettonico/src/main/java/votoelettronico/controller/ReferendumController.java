@@ -12,7 +12,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import votoelettronico.dao.SessioneDAO;
 import votoelettronico.factory.AlertFactory;
+import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Elettore;
 import votoelettronico.model.Sessione;
 
@@ -45,7 +47,13 @@ public class ReferendumController extends Controller {
     	if(alert.getResult() == ButtonType.OK) {
     		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Azione Registrata!").showAndWait();
     		//Carica Voto
+    		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+    		dao.addVotazione(s, logged);
+    		
+    		//Carica Scheda
+    		
     		//Change View
+    		changeView("home_elettore.fxml", logged);
     		
     	}
     }
@@ -60,8 +68,16 @@ public class ReferendumController extends Controller {
     		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Azione Registrata!").showAndWait();
     		
     		//Carica Voto
-    		//Change View
+    		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
+    		dao.addVotazione(s, logged);
     		
+    		//Carica Scheda
+    		RadioButton b = (RadioButton) scelta.getSelectedToggle();
+    		String risposta = b.getText();
+    		System.out.println(risposta);
+    		
+    		//Change View
+    		changeView("home_elettore.fxml", logged);
     	}
     }
 
