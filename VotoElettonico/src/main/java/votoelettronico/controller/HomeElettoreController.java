@@ -55,10 +55,10 @@ public class HomeElettoreController extends Controller implements Initializable 
 				changeView("",List.of(logged,s));
 				break;
 			case "Categorico-Partiti":
-				changeView("",List.of(logged,s));
+				changeView("categorico.fxml",List.of(logged,s));
 				break;
 			case "Categorico-Candidati":
-				changeView("",List.of(logged,s));
+				changeView("categorico.fxml",List.of(logged,s));
 				break;
 			case "Categorico-Preferenze":
 				changeView("categorico_preferenze.fxml",List.of(logged,s));
