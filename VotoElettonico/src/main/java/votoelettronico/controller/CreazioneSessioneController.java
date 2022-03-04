@@ -174,7 +174,7 @@ public class CreazioneSessioneController extends Controller implements Initializ
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		setupListe();
-		tipologiaVotoCB.getItems().setAll(List.of("Ordinale","Categorico","Categorico-Preferenze","Referendum"));		
+		tipologiaVotoCB.getItems().setAll(List.of("Ordinale-Partiti","Ordinale-Candidati","Categorico-Partiti","Categorico-Candidati","Categorico-Preferenze","Referendum"));		
 		tipologiaVotoCB.getSelectionModel().selectFirst();
 		tipologiaVittoriaCB.getItems().setAll(List.of("Maggioranza","Maggioranza-Assoluta"));
 		tipologiaVittoriaCB.getSelectionModel().selectFirst();

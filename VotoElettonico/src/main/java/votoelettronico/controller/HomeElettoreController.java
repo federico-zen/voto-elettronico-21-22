@@ -48,10 +48,16 @@ public class HomeElettoreController extends Controller implements Initializable 
 			case "Referendum":
 				changeView("referendum.fxml", List.of(logged,s));
 				break;
-			case "Ordinale":
+			case "Ordinale-Partiti":
 				changeView("",List.of(logged,s));
 				break;
-			case "Categorico":
+			case "Ordinale-Candidati":
+				changeView("",List.of(logged,s));
+				break;
+			case "Categorico-Partiti":
+				changeView("",List.of(logged,s));
+				break;
+			case "Categorico-Candidati":
 				changeView("",List.of(logged,s));
 				break;
 			case "Categorico-Preferenze":

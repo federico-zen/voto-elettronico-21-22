@@ -29,7 +29,7 @@ CREATE TABLE candidato (
 CREATE TABLE sessione (
 	id integer NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL,
-	modalita_voto enum('Ordinale','Categorico','Categorico-Preferenze','Referendum') NOT NULL,
+	modalita_voto enum('Ordinale-Partiti','Ordinale-Candidati','Categorico-Partiti','Categorico-Candidati','Categorico-Preferenze','Referendum') NOT NULL,
 	modalita_vittoria enum('Maggioranza','Maggioranza-Assoluta','Quorum','Senza-Quorum') NOT NULL,
 	domanda VARCHAR (255),
 	stato BOOLEAN NOT NULL,
