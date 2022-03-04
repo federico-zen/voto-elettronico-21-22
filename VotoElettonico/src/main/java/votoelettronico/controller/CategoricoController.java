@@ -114,11 +114,16 @@ public class CategoricoController extends Controller implements Initializable {
 		} else {
 			informationLabel.setText("Selezionare un candidato dalla lista");
 		}
-		
+		setupListe();
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+	}
+	
+	private void setupListe() {
 		PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 		List<Partito> l = dao.getPartiti();
 		
@@ -147,10 +152,6 @@ public class CategoricoController extends Controller implements Initializable {
 		} else {
 			
 		}
-		
-		
-		
-		
 	}
 
 }
