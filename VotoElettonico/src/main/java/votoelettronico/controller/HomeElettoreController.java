@@ -41,17 +41,27 @@ public class HomeElettoreController extends Controller implements Initializable 
     	Sessione s = null;
     	s = sessioniLV.getSelectionModel().getSelectedItem();
     	
+    	//cambiare a seconda della modalità di voto
     	if(s!=null) {
     		String modVoto = s.getMod_voto();
     		switch (modVoto) {
 			case "Referendum":
 				changeView("referendum.fxml", List.of(logged,s));
 				break;
+			case "Ordinale":
+				changeView("",List.of(logged,s));
+				break;
+			case "Categorico":
+				changeView("",List.of(logged,s));
+				break;
+			case "Categorico-Preferenze":
+				changeView("",List.of(logged,s));
+				break;
 
 			default:
 				break;
 			}
-    		//cambiare a seconda della modalità di voto
+    		
     		
     	}else {
     		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare una sessione").showAndWait();

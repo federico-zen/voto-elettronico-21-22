@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
@@ -59,6 +60,7 @@ public class ReferendumController extends Controller {
     	
     	if(alert.getResult() == ButtonType.OK) {
     		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Azione Registrata!").showAndWait();
+    		
     		//Carica Voto
     		//Change View
     		
