@@ -14,6 +14,7 @@ import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Partito;
 import votoelettronico.model.Sessione;
+import votoelettronico.model.Utente;
 
 public class SessioneDAO implements GenericDAO<Sessione>{
 
@@ -301,6 +302,24 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		
 		
 		return l;
+	}
+	
+	public void addVotazione(Sessione s , Utente u) {
+		
+		String query= "INSERT INTO votazione (idUtente,idSessione) VALUES (?,?)";
+		
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setString(1,u.getCodiceFiscale());
+			ps.setInt(2, s.getId());
+			ps.executeUpdate();
+			
+			DBConnection.getInstance().closeConnection();
+		}catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
 	}
 
 }
