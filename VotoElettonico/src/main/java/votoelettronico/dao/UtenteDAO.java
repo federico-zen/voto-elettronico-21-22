@@ -72,13 +72,14 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			ps.setString(1, id);
 			ps.setString(2, sha1);
 			ResultSet rs=ps.executeQuery();
-			while(rs.next())  
+			while(rs.next()) { 
 				
 				if(rs.getString("ruolo").equalsIgnoreCase("Elettore")) {
 					t=new Elettore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username")) ;
 				}else {
 					t= new Scrutinatore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username")) ;
 				}
+			}
 				
 			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
@@ -97,14 +98,16 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara("SELECT * FROM Utente");
 			ResultSet rs=ps.executeQuery();
-			while(rs.next())  
+			while(rs.next()) {
+				
+			
 				
 				if(rs.getString("ruolo").equalsIgnoreCase("Elettore")) {
 					l.add(new Elettore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username"))) ;
 				}else {
 					l.add(new Scrutinatore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username"))) ;
 				}
-				
+			}	
 			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
@@ -215,6 +218,21 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 	}
 	
-
-
+	public int getNElettori() {
+		
+		String query = "SELECT Count(*) AS conto FROM utente WHERE Ruolo = 'Elettore';";
+		int n = 0;
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				n = rs.getInt("conto");
+			}	
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		return n;
+	}
 }
