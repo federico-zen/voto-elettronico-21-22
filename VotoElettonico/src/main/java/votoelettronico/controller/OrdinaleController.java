@@ -2,11 +2,13 @@ package votoelettronico.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
@@ -40,6 +42,7 @@ public class OrdinaleController extends Controller implements Initializable {
 	Elettore logged;
 	Sessione s = null;
 	Map<Candidato,Partito> m = null;
+	Map<Integer, Partecipante> position = null;
 
     @FXML
     private Button addBtn;
@@ -79,7 +82,14 @@ public class OrdinaleController extends Controller implements Initializable {
 
     @FXML
     void addPartecipante(ActionEvent event) {
-
+    	Partecipante p = listaPartecipanti.getSelectionModel().getSelectedItem();
+    	listaPartecipanti.getItems().remove(p);
+    	int pos = posizioneCB.getSelectionModel().getSelectedIndex();
+    	listaPartecipantiInseriti.getItems().add(p);
+    	position.put(pos, p);
+    	posizioneCB.getItems().remove(pos);
+    	posizioneCB.getSelectionModel().selectFirst();
+    	listaPartecipantiInseriti.getItems().setAll(position.values());
     }
 
     @FXML
@@ -129,7 +139,7 @@ public class OrdinaleController extends Controller implements Initializable {
     
     @FXML
     void showInformation(MouseEvent event) {
-    	if (s.getMod_voto().equalsIgnoreCase("categorico-partiti")) {
+    	if (s.getMod_voto().equalsIgnoreCase("ordinale-partiti")) {
     		Partito p = (Partito) listaPartecipanti.getSelectionModel().getSelectedItem();
     		if(p!=null) {
     			nomePartitoLabel.setText(p.getNome());
@@ -177,6 +187,7 @@ public class OrdinaleController extends Controller implements Initializable {
 			informationLabel2.setText("Lista candidati inseriti");
 		}
 		setupListe();
+		position = new TreeMap<>();
 	}
 	
 	private void setupListe() {
@@ -206,6 +217,16 @@ public class OrdinaleController extends Controller implements Initializable {
 			    }
 			});
 			listaPartecipanti.getItems().setAll(l);
+			
+			//Init combobox
+			int numP = dao.getNPartiti();
+			if (numP < 10) {
+				for (int i = 1; i < numP+1; i++) {
+					posizioneCB.getItems().add(i);				
+				}
+			} else {
+				posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+			}
 		} else {
 			//Elenco dei Candidati 
 			m = new HashMap<>();
@@ -241,12 +262,23 @@ public class OrdinaleController extends Controller implements Initializable {
 			}
 			
 			listaPartecipanti.getItems().setAll(m.keySet());
+			
+			//Init combobox
+			int numC = dao.getNCandidati();
+			if (numC < 10) {
+				for (int i = 1; i < numC+1; i++) {
+					posizioneCB.getItems().add(i);				
+				}
+			} else {
+				posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+			}
+			
 		}
+		posizioneCB.getSelectionModel().selectFirst();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 	}
 
 }
