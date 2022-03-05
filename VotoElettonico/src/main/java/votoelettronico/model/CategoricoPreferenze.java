@@ -6,13 +6,13 @@ import java.util.List;
 public class CategoricoPreferenze extends Voto implements Iterable<Candidato>{
 	List<Candidato> preferenze;
 	
-	public CategoricoPreferenze(List<Candidato> preferenze,String tipo) {
-		super(tipo);
+	public CategoricoPreferenze(List<Candidato> preferenze) {
+		super("Categorico-Preferenze");
 		this.preferenze = preferenze;
 	}
 
-	public CategoricoPreferenze(int id,List<Candidato> preferenze,String tipo) {
-		super(tipo);
+	public CategoricoPreferenze(int id,List<Candidato> preferenze) {
+		super("Categorico-Preferenze");
 		this.preferenze = preferenze;
 	}
 

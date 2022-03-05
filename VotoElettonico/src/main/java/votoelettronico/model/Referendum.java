@@ -4,18 +4,18 @@ public class Referendum extends Voto {
 	
 	boolean risposta;
 
-	public Referendum(int id,boolean risposta,String tipo) {
-		super(id,tipo);
+	public Referendum(int id,boolean risposta) {
+		super(id,"Referendum");
 		this.risposta =risposta;
 		
 	}
 	
-	public Referendum(boolean risposta,String tipo) {
-		super(tipo);
+	public Referendum(boolean risposta) {
+		super("Referendum");
 		this.risposta =risposta;
 	}
 
-	public boolean isRisposta() {
+	public boolean getRisposta() {
 		return risposta;
 	}
 
