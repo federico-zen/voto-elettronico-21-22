@@ -166,7 +166,7 @@ public class OrdinaleController extends Controller {
 		logged = (Elettore) l.get(0);
 		s = (Sessione) l.get(1);
 		nomeSessioneLabel.setText(s.getNome());
-		if (s.getMod_voto().equalsIgnoreCase("categorico-partiti")) {
+		if (s.getMod_voto().equalsIgnoreCase("ordinale-partiti")) {
 			informationLabel.setText("Selezionare un partito dalla lista");
 			informationLabel2.setText("Lista partiti inseriti");
 		} else {
@@ -180,7 +180,7 @@ public class OrdinaleController extends Controller {
 		PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 		List<Partito> l = dao.getPartiti();
 		
-		if (s.getMod_voto().equalsIgnoreCase("categorico-partiti")) {
+		if (s.getMod_voto().equalsIgnoreCase("ordinale-partiti")) {
 			
 			//Elenco dei Partiti
 			listaPartecipanti.setCellFactory(new Callback<ListView<Partecipante>, ListCell<Partecipante>>() {
