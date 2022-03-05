@@ -1,14 +1,17 @@
 package votoelettronico.controller;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -32,7 +35,7 @@ import votoelettronico.model.Partecipante;
 import votoelettronico.model.Partito;
 import votoelettronico.model.Sessione;
 
-public class OrdinaleController extends Controller {
+public class OrdinaleController extends Controller implements Initializable {
 	
 	Elettore logged;
 	Sessione s = null;
@@ -239,6 +242,11 @@ public class OrdinaleController extends Controller {
 			
 			listaPartecipanti.getItems().setAll(m.keySet());
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 	}
 
 }
