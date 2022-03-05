@@ -137,7 +137,7 @@ public class VotoDAO implements GenericDAO<Voto> {
 		return n;
 	}
 	
-public int getNSchedeRegolari() {
+	public int getNSchedeRegolari() {
 		
 		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =0';";
 		int n = 0;
