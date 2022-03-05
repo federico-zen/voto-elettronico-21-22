@@ -263,4 +263,40 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		}
 	}
 	
+public int getNPartiti() {
+		
+		String query = "SELECT Count(*) AS conto FROM candidato WHERE is_p = 1;";
+		int n = 0;
+		try {
+			DBConnection.getInstance().openConnection();
+			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				n = rs.getInt("conto");
+			}	
+		} catch (SQLException e) {
+			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+		}
+		
+		return n;
+	}
+
+public int getNCandidati() {
+	
+	String query = "SELECT Count(*) AS conto FROM candidato WHERE is_p = 0;";
+	int n = 0;
+	try {
+		DBConnection.getInstance().openConnection();
+		PreparedStatement ps = DBConnection.getInstance().prepara(query);
+		ResultSet rs=ps.executeQuery();
+		while(rs.next()) {
+			n = rs.getInt("conto");
+		}	
+	} catch (SQLException e) {
+		VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+	}
+	
+	return n;
+}
+	
 }
