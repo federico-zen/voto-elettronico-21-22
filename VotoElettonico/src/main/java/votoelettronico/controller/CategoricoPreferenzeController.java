@@ -25,11 +25,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.SessioneDAO;
+import votoelettronico.dao.VotoDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Candidato;
 import votoelettronico.model.Elettore;
 import votoelettronico.model.Partito;
+import votoelettronico.model.SchedaBianca;
 import votoelettronico.model.Sessione;
 
 public class CategoricoPreferenzeController extends Controller implements Initializable {
@@ -69,6 +71,8 @@ public class CategoricoPreferenzeController extends Controller implements Initia
     		dao.addVotazione(s, logged);
     		
     		//Carica Scheda
+    		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		daoV.save(new SchedaBianca(),s.getId());
     		
     		//Change View
     		changeView("home_elettore.fxml", logged);
@@ -139,7 +143,7 @@ public class CategoricoPreferenzeController extends Controller implements Initia
 				e.printStackTrace();
 			}
     	}else {
-    		//Errore
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare un Partito").showAndWait();
     	}
     }
 

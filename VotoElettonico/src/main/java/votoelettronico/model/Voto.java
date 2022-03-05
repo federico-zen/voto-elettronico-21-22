@@ -3,6 +3,10 @@ package votoelettronico.model;
 public abstract class Voto {
 	protected int id;
 	protected String tipo;
+	
+	public Voto() {
+		
+	}
 
 	public Voto(String tipo) {
 		this.tipo = tipo;

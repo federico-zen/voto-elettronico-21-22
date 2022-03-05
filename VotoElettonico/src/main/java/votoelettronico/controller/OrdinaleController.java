@@ -28,13 +28,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.SessioneDAO;
+import votoelettronico.dao.VotoDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Candidato;
 import votoelettronico.model.Elettore;
+import votoelettronico.model.Ordinale;
 import votoelettronico.model.Partecipante;
 import votoelettronico.model.Partito;
+import votoelettronico.model.SchedaBianca;
 import votoelettronico.model.Sessione;
 
 public class OrdinaleController extends Controller implements Initializable {
@@ -89,6 +92,7 @@ public class OrdinaleController extends Controller implements Initializable {
     	position.put(pos, p);
     	posizioneCB.getItems().remove(pos);
     	posizioneCB.getSelectionModel().selectFirst();
+    	System.out.println(position);
     	listaPartecipantiInseriti.getItems().setAll(position.values());
     }
 
@@ -106,7 +110,8 @@ public class OrdinaleController extends Controller implements Initializable {
     		dao.addVotazione(s, logged);
     		
     		//Carica Scheda
-    		
+    		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		daoV.save(new SchedaBianca(),s.getId());
     		
     		//Change View
     		changeView("home_elettore.fxml", logged);
@@ -128,7 +133,12 @@ public class OrdinaleController extends Controller implements Initializable {
     		dao.addVotazione(s, logged);
     		
     		//Carica Scheda
-    		//List<Candidato> selected = listaCandidati.getSelectionModel().getSelectedItems();
+    		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		List<Partecipante> l = new ArrayList<>();
+    		for (Partecipante p : position.values()) {
+				l.add(p);
+			}
+    		daoV.save(new Ordinale(l,s.getMod_voto()),s.getId());
     		
     		
     		
@@ -149,7 +159,7 @@ public class OrdinaleController extends Controller implements Initializable {
 					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 				}
     		}else {
-    			//Errore
+    			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare un Partito").showAndWait();
     		}
     	}else {
     		Candidato c = (Candidato) listaPartecipanti.getSelectionModel().getSelectedItem();
@@ -162,7 +172,7 @@ public class OrdinaleController extends Controller implements Initializable {
 					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 				}
     		}else {
-    			//Errore
+    			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare un Candidato").showAndWait();
     		}
     	
     	}

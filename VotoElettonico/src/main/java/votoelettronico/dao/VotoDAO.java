@@ -119,13 +119,14 @@ public class VotoDAO implements GenericDAO<Voto> {
 		}
 	}
 	
-	public int getNSchedeBianche() {
+	public int getNSchedeBianche(int idSessione) {
 		
-		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =1;";
+		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =1 AND idSessione =?;";
 		int n = 0;
 		try {
 			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				n = rs.getInt("conto");
@@ -137,13 +138,14 @@ public class VotoDAO implements GenericDAO<Voto> {
 		return n;
 	}
 	
-	public int getNSchedeRegolari() {
+	public int getNSchedeRegolari(int idSessione) {
 		
-		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =0';";
+		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =0 AND idSessione =?;";
 		int n = 0;
 		try {
 			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
+			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				n = rs.getInt("conto");
@@ -154,6 +156,11 @@ public class VotoDAO implements GenericDAO<Voto> {
 		
 		return n;
 	}
+	
+	/*public Risultato getRisultato(int idSessione) {
+		return null;
+	}*/
+	
 	
 
 }

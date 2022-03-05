@@ -26,13 +26,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.SessioneDAO;
+import votoelettronico.dao.VotoDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Candidato;
+import votoelettronico.model.Categorico;
 import votoelettronico.model.Elettore;
+import votoelettronico.model.Ordinale;
 import votoelettronico.model.Partecipante;
 import votoelettronico.model.Partito;
+import votoelettronico.model.SchedaBianca;
 import votoelettronico.model.Sessione;
 
 public class CategoricoController extends Controller implements Initializable {
@@ -76,7 +80,8 @@ public class CategoricoController extends Controller implements Initializable {
     		dao.addVotazione(s, logged);
     		
     		//Carica Scheda
-    		
+    		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		daoV.save(new SchedaBianca(),s.getId());
     		
     		//Change View
     		changeView("home_elettore.fxml", logged);
@@ -98,7 +103,8 @@ public class CategoricoController extends Controller implements Initializable {
     		dao.addVotazione(s, logged);
     		
     		//Carica Scheda
-    		//List<Candidato> selected = listaCandidati.getSelectionModel().getSelectedItems();
+    		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		daoV.save(new Categorico(listaPartecipanti.getSelectionModel().getSelectedItem(),s.getMod_voto()),s.getId());
     		
     		
     		
@@ -119,7 +125,7 @@ public class CategoricoController extends Controller implements Initializable {
 					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 				}
     		}else {
-    			//Errore
+    			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare un Partito").showAndWait();
     		}
     	}else {
     		Candidato c = (Candidato) listaPartecipanti.getSelectionModel().getSelectedItem();
@@ -132,7 +138,7 @@ public class CategoricoController extends Controller implements Initializable {
 					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 				}
     		}else {
-    			//Errore
+    			AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Selezionare un Candidato").showAndWait();
     		}
     	
     	}

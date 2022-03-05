@@ -6,6 +6,10 @@ public class SchedaBianca extends Voto {
 		super(tipo);
 		
 	}
+	public SchedaBianca() {
+		
+		
+	}
 
 	public SchedaBianca(int id,String tipo) {
 		super(id,tipo);
