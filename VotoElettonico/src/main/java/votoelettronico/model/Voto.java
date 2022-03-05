@@ -2,15 +2,25 @@ package votoelettronico.model;
 
 public abstract class Voto {
 	protected int id;
+	protected String tipo;
 
-	public Voto() {
-		super();
+	public Voto(String tipo) {
+		this.tipo = tipo;
 	}
 	
-	public Voto(int id) {
+	
+	public Voto(int id,String tipo) {
 		super();
-		
 		this.id = id;
+		this.tipo = tipo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -27,8 +37,10 @@ public abstract class Voto {
 
 	@Override
 	public String toString() {
-		return "Voto [id=" + id + "]";
+		return "Voto [id=" + id + ", tipo=" + tipo + "]";
 	}
+
+	
 	
 	
 	

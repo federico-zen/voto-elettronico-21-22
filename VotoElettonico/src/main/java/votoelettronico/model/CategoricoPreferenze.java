@@ -6,13 +6,13 @@ import java.util.List;
 public class CategoricoPreferenze extends Voto implements Iterable<Candidato>{
 	List<Candidato> preferenze;
 	
-	public CategoricoPreferenze(List<Candidato> preferenze) {
-		super();
+	public CategoricoPreferenze(List<Candidato> preferenze,String tipo) {
+		super(tipo);
 		this.preferenze = preferenze;
 	}
 
-	public CategoricoPreferenze(int id,List<Candidato> preferenze) {
-		super(id);
+	public CategoricoPreferenze(int id,List<Candidato> preferenze,String tipo) {
+		super(tipo);
 		this.preferenze = preferenze;
 	}
 
@@ -23,9 +23,11 @@ public class CategoricoPreferenze extends Voto implements Iterable<Candidato>{
 
 	@Override
 	public String toString() {
-		return "CategoricoPreferenze [preferenze=" + preferenze + ", getId()=" + getId() + ", isBianca()=" + isBianca()
-				+ "]";
+		return "CategoricoPreferenze [preferenze=" + preferenze + ", getTipo()=" + getTipo() + ", getId()=" + getId()
+				+ ", isBianca()=" + isBianca() + "]";
 	}
+
+	
 	
 	
 

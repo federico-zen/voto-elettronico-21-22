@@ -5,31 +5,25 @@ import java.util.List;
 
 public class Ordinale extends Voto implements Iterable<Partecipante>{
 	List<Partecipante> preferenza;
-	String tipo ;
+	
 
 	public Ordinale(List<Partecipante> preferenza,String tipo) {
-		super();
+		super(tipo);
 		this.preferenza = preferenza;
-		this.tipo = tipo;
+		
 	}
 
 	public Ordinale(int id,List<Partecipante> preferenza,String tipo) {
-		super(id);
+		super(id,tipo);
 		this.preferenza=preferenza;
-		this.tipo = tipo;
+		
 	}
 	
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+	
 
 	@Override
 	public String toString() {
-		return "Categorico [preferenza=" + preferenza + ", tipo=" + tipo + ", getId()=" + getId() + ", isBianca()="
+		return "Categorico [preferenza=" + preferenza + ", tipo=" + getTipo() + ", getId()=" + getId() + ", isBianca()="
 				+ isBianca() + "]";
 	}
 

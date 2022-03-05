@@ -1,8 +1,13 @@
 package votoelettronico.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +20,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
@@ -22,6 +28,7 @@ import votoelettronico.dao.PartecipanteDAO;
 import votoelettronico.dao.SessioneDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
+import votoelettronico.logger.VotoLogger;
 import votoelettronico.model.Candidato;
 import votoelettronico.model.Elettore;
 import votoelettronico.model.Partecipante;
@@ -32,6 +39,7 @@ public class CategoricoController extends Controller implements Initializable {
 	
 	Elettore logged;
 	Sessione s = null;
+	Map<Candidato,Partito> m = null;
 
     @FXML
     private Button confirmBtn;
@@ -69,6 +77,7 @@ public class CategoricoController extends Controller implements Initializable {
     		
     		//Carica Scheda
     		
+    		
     		//Change View
     		changeView("home_elettore.fxml", logged);
     	}
@@ -100,7 +109,33 @@ public class CategoricoController extends Controller implements Initializable {
 
     @FXML
     void showInformation(MouseEvent event) {
-
+    	if (s.getMod_voto().equalsIgnoreCase("categorico-partiti")) {
+    		Partito p = (Partito) listaPartecipanti.getSelectionModel().getSelectedItem();
+    		if(p!=null) {
+    			nomePartitoLabel.setText(p.getNome());
+    			try {
+					logo.setImage(new Image(p.getLogo().getBinaryStream()));
+				} catch (SQLException e) {
+					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+				}
+    		}else {
+    			//Errore
+    		}
+    	}else {
+    		Candidato c = (Candidato) listaPartecipanti.getSelectionModel().getSelectedItem();
+    		if(c!=null) {
+    			Partito p = m.get(c);
+    			nomePartitoLabel.setText(p.getNome());
+    			try {
+					logo.setImage(new Image(p.getLogo().getBinaryStream()));
+				} catch (SQLException e) {
+					VotoLogger.writeToLog("Error : ", Level.WARNING, e);
+				}
+    		}else {
+    			//Errore
+    		}
+    	
+    	}
     }
 
 	@Override
@@ -129,6 +164,7 @@ public class CategoricoController extends Controller implements Initializable {
 		
 		if (s.getMod_voto().equalsIgnoreCase("categorico-partiti")) {
 			
+			//Elenco dei Partiti
 			listaPartecipanti.setCellFactory(new Callback<ListView<Partecipante>, ListCell<Partecipante>>() {
 
 			    @Override
@@ -150,7 +186,40 @@ public class CategoricoController extends Controller implements Initializable {
 			});
 			listaPartecipanti.getItems().setAll(l);
 		} else {
+			//Elenco dei Candidati 
+			m = new HashMap<>();
 			
+			listaPartecipanti.setCellFactory(new Callback<ListView<Partecipante>, ListCell<Partecipante>>() {
+
+			    @Override
+			    public ListCell<Partecipante> call(ListView<Partecipante> list) {
+			        ListCell<Partecipante> cell = new ListCell<Partecipante>() {
+			            @Override
+			            public void updateItem(Partecipante item, boolean empty) {
+			                super.updateItem(item, empty);
+			                if(item!= null) {
+			                	setText(item.getNome());
+			                }else {
+			                	setText(null);
+			                }
+			            }
+			        };
+
+			        return cell;
+			    }
+			});
+			
+			
+			
+			for (Partito partito : l) {
+				Iterator<Candidato> it = partito.iterator();
+				while(it.hasNext()) {
+					Candidato c = it.next();
+					m.put(c, partito);
+				}
+			}
+			
+			listaPartecipanti.getItems().setAll(m.keySet());
 		}
 	}
 

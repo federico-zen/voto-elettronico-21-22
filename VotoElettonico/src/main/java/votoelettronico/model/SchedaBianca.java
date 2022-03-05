@@ -2,13 +2,13 @@ package votoelettronico.model;
 
 public class SchedaBianca extends Voto {
 	
-	public SchedaBianca() {
-		super();
+	public SchedaBianca(String tipo) {
+		super(tipo);
 		
 	}
 
-	public SchedaBianca(int id) {
-		super(id);
+	public SchedaBianca(int id,String tipo) {
+		super(id,tipo);
 		
 	}
 
