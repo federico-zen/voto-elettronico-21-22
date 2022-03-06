@@ -91,10 +91,11 @@ public class OrdinaleController extends Controller implements Initializable {
     	//int pos = posizioneCB.getSelectionModel().getSelectedItem().intValue();
     	int pos =posizioneCB.getSelectionModel().getSelectedItem();
     	pos--;
-    	System.out.println(pos);
+    	//System.out.println(p);
+    	//System.out.println(pos);
     	position[pos]=p;
     	posizioneCB.getItems().remove(posizioneCB.getSelectionModel().getSelectedItem());
-    	//posizioneCB.getSelectionModel().selectFirst();
+    	posizioneCB.getSelectionModel().selectFirst();
     	listaPartecipantiInseriti.getItems().setAll(Arrays.asList(position));
     }
 
@@ -136,10 +137,7 @@ public class OrdinaleController extends Controller implements Initializable {
     		
     		//Carica Scheda
     		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
-    		List<Partecipante> l = new ArrayList<>();
-    		for (Partecipante p : position) {
-				l.add(p);
-			}
+    		List<Partecipante> l = listaPartecipantiInseriti.getItems();
     		daoV.save(new Ordinale(l,s.getMod_voto()),s.getId());
     		
     		
@@ -304,10 +302,12 @@ public class OrdinaleController extends Controller implements Initializable {
 			int numC = dao.getNCandidati();
 			if (numC < 10) {
 				for (int i = 1; i < numC+1; i++) {
-					posizioneCB.getItems().add(i);				
+					posizioneCB.getItems().add(i);	
+					position = new Partecipante[numC];
 				}
 			} else {
 				posizioneCB.getItems().setAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+				position = new Partecipante[10];
 			}
 			
 		}
