@@ -3,6 +3,7 @@ package votoelettronico.controller;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,7 +46,7 @@ public class OrdinaleController extends Controller implements Initializable {
 	Elettore logged;
 	Sessione s = null;
 	Map<Candidato,Partito> m = null;
-	Map<Integer, Partecipante> position = null;
+	Partecipante position[]= null;
 
     @FXML
     private Button addBtn;
@@ -87,13 +88,14 @@ public class OrdinaleController extends Controller implements Initializable {
     void addPartecipante(ActionEvent event) {
     	Partecipante p = listaPartecipanti.getSelectionModel().getSelectedItem();
     	listaPartecipanti.getItems().remove(p);
-    	int pos = posizioneCB.getSelectionModel().getSelectedIndex();
-    	listaPartecipantiInseriti.getItems().add(p);
-    	position.put(pos, p);
-    	posizioneCB.getItems().remove(pos);
-    	posizioneCB.getSelectionModel().selectFirst();
-    	System.out.println(position);
-    	listaPartecipantiInseriti.getItems().setAll(position.values());
+    	//int pos = posizioneCB.getSelectionModel().getSelectedItem().intValue();
+    	int pos =posizioneCB.getSelectionModel().getSelectedItem();
+    	pos--;
+    	System.out.println(pos);
+    	position[pos]=p;
+    	posizioneCB.getItems().remove(posizioneCB.getSelectionModel().getSelectedItem());
+    	//posizioneCB.getSelectionModel().selectFirst();
+    	listaPartecipantiInseriti.getItems().setAll(Arrays.asList(position));
     }
 
     @FXML
@@ -135,7 +137,7 @@ public class OrdinaleController extends Controller implements Initializable {
     		//Carica Scheda
     		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
     		List<Partecipante> l = new ArrayList<>();
-    		for (Partecipante p : position.values()) {
+    		for (Partecipante p : position) {
 				l.add(p);
 			}
     		daoV.save(new Ordinale(l,s.getMod_voto()),s.getId());
@@ -197,12 +199,35 @@ public class OrdinaleController extends Controller implements Initializable {
 			informationLabel2.setText("Lista candidati inseriti");
 		}
 		setupListe();
-		position = new TreeMap<>();
+		
 	}
 	
 	private void setupListe() {
 		PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 		List<Partito> l = dao.getPartiti();
+		
+		listaPartecipantiInseriti.setCellFactory(new Callback<ListView<Partecipante>, ListCell<Partecipante>>() {
+
+		    @Override
+		    public ListCell<Partecipante> call(ListView<Partecipante> list) {
+		        ListCell<Partecipante> cell = new ListCell<Partecipante>() {
+		            @Override
+		            public void updateItem(Partecipante item, boolean empty) {
+		                super.updateItem(item, empty);
+		                if(item!= null) {
+		                	setText(item.getNome());
+		                }else {
+		                	setText(null);
+		                }
+		            }
+		        };
+
+		        return cell;
+		    }
+		});
+		
+		
+		
 		
 		if (s.getMod_voto().equalsIgnoreCase("ordinale-partiti")) {
 			
@@ -234,8 +259,10 @@ public class OrdinaleController extends Controller implements Initializable {
 				for (int i = 1; i < numP+1; i++) {
 					posizioneCB.getItems().add(i);				
 				}
+				position = new Partecipante[numP];
 			} else {
 				posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+				position = new Partecipante[10];
 			}
 		} else {
 			//Elenco dei Candidati 
@@ -280,11 +307,12 @@ public class OrdinaleController extends Controller implements Initializable {
 					posizioneCB.getItems().add(i);				
 				}
 			} else {
-				posizioneCB.getItems().addAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+				posizioneCB.getItems().setAll(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 			}
 			
 		}
 		posizioneCB.getSelectionModel().selectFirst();
+		
 	}
 
 	@Override
