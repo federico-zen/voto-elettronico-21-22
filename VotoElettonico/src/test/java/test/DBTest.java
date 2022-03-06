@@ -51,8 +51,7 @@ public class DBTest {
 		Utente u =dao.get("CF","123");
 		assertFalse(u.isElettore());
 		dao.delete(u);
-		
-		
+			
 	}
 	
 
