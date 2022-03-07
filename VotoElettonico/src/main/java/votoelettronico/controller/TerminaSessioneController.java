@@ -12,9 +12,11 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import votoelettronico.dao.SessioneDAO;
+import votoelettronico.dao.VotoDAO;
 import votoelettronico.factory.AlertFactory;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.model.Partito;
+import votoelettronico.model.Risultato;
 import votoelettronico.model.Scrutinatore;
 import votoelettronico.model.Sessione;
 
@@ -60,7 +62,17 @@ public class TerminaSessioneController extends Controller implements Initializab
 
     @FXML
     void viewResult(ActionEvent event) {
-
+    	Sessione s =sessioniTerminateLV.getSelectionModel().getSelectedItem();
+    	
+    	if(s!= null) {
+    		VotoDAO dao = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
+    		Risultato r = dao.getRisultato(s);
+    		
+    		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, r.getVincitore()).showAndWait();
+    		
+    	}else {
+    		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona una sessione da terminare").showAndWait();
+    	}
     }
 
 	@Override

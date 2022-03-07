@@ -263,7 +263,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 	
 	public List<Sessione> getAllActiveNotVoted(String CFElettore) {
 		List<Sessione> l = new ArrayList<>();
-		String query ="SELECT * FROM sessione LEFT JOIN votazione ON sessione.id = votazione.idSessione  WHERE stato = 1 EXCEPT SELECT * FROM sessione RIGHT JOIN votazione ON sessione.id = votazione.idSessione  WHERE stato = 1 AND votazione.idUtente = ?";
+		String query ="select * from sessione as S where S.stato = 1 AND not exists (select * from votazione where idUtente = ? and idSessione = S.id)";
 		
 		try {
 			DBConnection.getInstance().openConnection();
