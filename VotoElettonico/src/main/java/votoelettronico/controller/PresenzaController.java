@@ -44,9 +44,7 @@ public class PresenzaController extends Controller {
     		AlertFactory.getInstance().getSlimAlert(AlertType.INFORMATION, "Inserire tutti i campi").showAndWait();
     	}else {
     		String user=username.getText() ,psw=password.getText(), cf = cfElettore.getText();
-    		System.out.println("Username : "+user);
-    		System.out.println("Password : "+psw);
-    		System.out.println("CF Elettore : "+cf);
+    		
     		
     		UtenteDAO dao = (UtenteDAO) DAOFactory.getInstance().getUtenteDAO();
     		Utente u = dao.get(user, psw);

@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,11 @@ import votoelettronico.model.Utente;
 
 
 public class DBTest {
+	
+	@BeforeAll
+	public static void setup() throws SQLException {
+		DBConnection.getInstance().openConnection();
+	}
 	
 	
 	
@@ -52,6 +59,11 @@ public class DBTest {
 		assertFalse(u.isElettore());
 		dao.delete(u);
 			
+	}
+	
+	@AfterAll
+	public static void end() throws SQLException {
+		DBConnection.getInstance().closeConnection();
 	}
 	
 
