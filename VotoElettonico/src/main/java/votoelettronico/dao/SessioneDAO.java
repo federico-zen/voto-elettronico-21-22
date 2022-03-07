@@ -25,7 +25,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1,Integer.parseInt(id));
 			rs = ps.executeQuery();
@@ -37,7 +37,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			if(!rs.getString("modalita_voto").equalsIgnoreCase("referendum")) {
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				DBConnection.getInstance().openConnection();
+				
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				ps = DBConnection.getInstance().prepara(query);
 				rs = ps.executeQuery();
@@ -51,7 +51,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			
 			
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -69,7 +69,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query ="SELECT * FROM sessione ";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs = ps.executeQuery();
 			
@@ -81,7 +81,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 					//prendo i singoli partiti che sono sul DB e sono nella Sessione
 					
 					
-					DBConnection.getInstance().openConnection();
+					
 					query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id ";
 					PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 					ResultSet rs2 = ps2.executeQuery();
@@ -101,7 +101,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			
 			
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -115,7 +115,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query = "INSERT INTO sessione (nome,modalita_voto,modalita_vittoria,domanda,stato) VALUES(?,?,?,?,?)";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, t.getNome());
 			ps.setString(2,t.getMod_voto() );
@@ -141,7 +141,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 				ps.executeUpdate();
 				
 			}
-			DBConnection.getInstance().closeConnection();
+			
 		}catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -167,7 +167,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query ="SELECT * FROM sessione WHERE stato = 1";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs = ps.executeQuery();
 			
@@ -176,7 +176,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 						new ArrayList<Partito>());
 			
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				DBConnection.getInstance().openConnection();
+				
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 				ResultSet rs2 = ps2.executeQuery();
@@ -195,7 +195,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			
 			
-			DBConnection.getInstance().closeConnection();		
+				
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -209,7 +209,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query ="SELECT * FROM sessione WHERE stato = 0";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs = ps.executeQuery();
 			
@@ -218,7 +218,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 						new ArrayList<Partito>());
 			
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				DBConnection.getInstance().openConnection();
+				
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 				ResultSet rs2 = ps2.executeQuery();
@@ -237,7 +237,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			
 			
-			DBConnection.getInstance().closeConnection();		
+				
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -250,11 +250,11 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 	public void closeSession(Sessione s) {
 		String query ="UPDATE sessione SET stato = 0 WHERE id = ?";
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, s.getId());
 			ps.executeUpdate();
-			DBConnection.getInstance().closeConnection();
+			
 		}catch (SQLException e){
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -266,7 +266,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query ="select * from sessione as S where S.stato = 1 AND not exists (select * from votazione where idUtente = ? and idSessione = S.id)";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, CFElettore);
 			ResultSet rs = ps.executeQuery();
@@ -276,7 +276,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 						new ArrayList<Partito>());
 			
 				//prendo i singoli partiti che sono sul DB e sono nella Sessione
-				DBConnection.getInstance().openConnection();
+				
 				query = "SELECT C.id as idPartito FROM partecipazione AS P JOIN candidato AS C ON P.idCandidato = C.id WHERE C.is_p = 1";
 				PreparedStatement ps2 = DBConnection.getInstance().prepara(query);
 				ResultSet rs2 = ps2.executeQuery();
@@ -295,7 +295,7 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 			
 			
 			
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -309,13 +309,13 @@ public class SessioneDAO implements GenericDAO<Sessione>{
 		String query= "INSERT INTO votazione (idUtente,idSessione) VALUES (?,?)";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1,u.getCodiceFiscale());
 			ps.setInt(2, s.getId());
 			ps.executeUpdate();
 			
-			DBConnection.getInstance().closeConnection();
+			
 		}catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}

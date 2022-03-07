@@ -3,18 +3,14 @@ package votoelettronico.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 
 import votoelettronico.dbconnection.DBConnection;
 import votoelettronico.factory.DAOFactory;
 import votoelettronico.logger.VotoLogger;
-import votoelettronico.model.Candidato;
 import votoelettronico.model.Categorico;
 import votoelettronico.model.CategoricoPreferenze;
 import votoelettronico.model.Ordinale;
@@ -62,7 +58,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 	
 	public void save(Voto t , int idSessione) {
 		try {
-		DBConnection.getInstance().openConnection();
 		PreparedStatement ps = null;
 		if(t.isBianca()) {
 			//Scheda Bianca
@@ -124,7 +119,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 			}		
 		}
 
-		DBConnection.getInstance().closeConnection();
 		}catch(Exception e) {
 			VotoLogger.writeToLog("Error : ",Level.WARNING,e);
 		}
@@ -135,7 +129,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 		String query = "SELECT Count(*) AS conto FROM voto WHERE scheda_bianca =1 AND idSessione =?;";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
@@ -154,7 +147,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 		String query = "SELECT Count(*) AS conto FROM votazione WHERE  idSessione =?;";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
@@ -172,7 +164,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 		String query = "SELECT Count(*) AS conto FROM voto WHERE risposta = 1 AND idSessione =?;";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
@@ -190,7 +181,6 @@ public class VotoDAO implements GenericDAO<Voto> {
 		String query = "SELECT Count(*) AS conto FROM voto WHERE risposta = 0 AND idSessione =?;";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
@@ -208,19 +198,16 @@ public class VotoDAO implements GenericDAO<Voto> {
 		Map<Partecipante,Integer> m = new HashMap<>();
 		String query ="SELECT candidato.id as idC,count(*) as nVoti FROM `voto` JOIN candidato ON voto.idCandidato = candidato.id WHERE ordine = 1 AND idSessione = ? GROUP by candidato.id ORDER BY nVoti DESC ;";
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
 			PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 			while(rs.next()) {
-				DBConnection.getInstance().openConnection();
 				Partecipante p = dao.get(Integer.toString(rs.getInt("idC")));
 				m.put(p, rs.getInt("nVoti"));
 				
 			}	
 			
-			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -235,19 +222,16 @@ public class VotoDAO implements GenericDAO<Voto> {
 		Map<Partecipante,Integer> m = new HashMap<>();
 		String query ="SELECT candidato.id as idC,count(*) as nVoti FROM `voto` JOIN candidato ON voto.idCandidato = candidato.id WHERE   idSessione = ? GROUP by candidato.id ORDER BY nVoti DESC ;";
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idSessione);
 			ResultSet rs=ps.executeQuery();
 			PartecipanteDAO dao = (PartecipanteDAO) DAOFactory.getInstance().getPartecipanteDAO();
 			while(rs.next()) {
-				DBConnection.getInstance().openConnection();
 				Partecipante p = dao.get(Integer.toString(rs.getInt("idC")));
 				m.put(p, rs.getInt("nVoti"));
 				
 			}	
 			
-			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}

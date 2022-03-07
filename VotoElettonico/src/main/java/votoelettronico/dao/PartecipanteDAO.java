@@ -21,7 +21,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -63,24 +62,20 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				Partito p = (Partito) t;
 				query = "UPDATE candidato SET nome = ?,logo = ? Where id = ?";
 				
-				DBConnection.getInstance().openConnection();
 				PreparedStatement ps = DBConnection.getInstance().prepara(query);
 				ps.setString(1, p.getNome());
 				ps.setBlob(2, p.getLogo());
 				ps.setInt(3, p.getId());
 				ps.executeUpdate();			
-				DBConnection.getInstance().closeConnection();
 			}else {
 				Candidato c = (Candidato) t;
 				query = "UPDATE candidato SET nome = ?,cognome = ?  Where id = ?";
 				
-				DBConnection.getInstance().openConnection();
 				PreparedStatement ps = DBConnection.getInstance().prepara(query);
 				ps.setString(1, c.getNome());
 				ps.setString(2, c.getCognome());
 				ps.setInt(3, c.getId());
 				ps.executeUpdate();	
-				DBConnection.getInstance().closeConnection();
 			}
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
@@ -95,13 +90,11 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 			if(t.isPartito()) { // è Partito
 				PreparedStatement ps;
 				query = "DELETE FROM candidato WHERE idPartito=?";
-				DBConnection.getInstance().openConnection();
 				 ps = DBConnection.getInstance().prepara(query);
 				ps.setInt(1, t.getId());
 				ps.execute();
 				
 				query = "DELETE FROM candidato WHERE id=?";
-				DBConnection.getInstance().openConnection();
 				ps = DBConnection.getInstance().prepara(query);
 				ps.setInt(1, t.getId());
 				ps.execute();
@@ -110,14 +103,12 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				int id = t.getId();
 				query = "DELETE FROM candidato WHERE id = ?";
 				
-				DBConnection.getInstance().openConnection();
 				PreparedStatement ps = DBConnection.getInstance().prepara(query);
 				ps.setInt(1, id);
 				ps.execute();
 				
 			}
 			
-			DBConnection.getInstance().closeConnection();
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -129,7 +120,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		String query = "SELECT C.id AS id_candidato,C.nome,C.cognome FROM candidato AS P JOIN candidato AS C ON P.id = C.idPartito WHERE C.idPartito= ?";
 			try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, idPartito);
 			ResultSet rs=ps.executeQuery();
@@ -139,7 +129,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
  				l.add(c);
 			}
 					
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -153,7 +142,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
@@ -161,7 +149,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				l.add(p);
 			}
 				
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -176,7 +163,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setInt(1, id);
 			ResultSet rs=ps.executeQuery();
@@ -184,7 +170,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				l = new Partito(rs.getInt("id"),rs.getString("nome"),getCandidati(rs.getInt("id")),rs.getBlob("logo"));
 			}
 				
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -200,7 +185,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, p.getNome());
@@ -221,7 +205,6 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				Candidato temp = it.next();
 				saveCandidato(temp, p.getId());
 			}
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -233,13 +216,11 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 				
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getCognome());
 			ps.setInt(3, p);
 			ps.executeUpdate();
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -250,14 +231,12 @@ public class PartecipanteDAO implements GenericDAO<Partecipante> {
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getCognome());
 			ps.setInt(3, p);
 			ps.setInt(4, c.getId());
 			ps.executeUpdate();
-			DBConnection.getInstance().closeConnection();		
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -268,7 +247,6 @@ public int getNPartiti() {
 		String query = "SELECT Count(*) AS conto FROM candidato WHERE is_p = 1;";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
@@ -286,7 +264,6 @@ public int getNCandidati() {
 	String query = "SELECT Count(*) AS conto FROM candidato WHERE is_p = 0;";
 	int n = 0;
 	try {
-		DBConnection.getInstance().openConnection();
 		PreparedStatement ps = DBConnection.getInstance().prepara(query);
 		ResultSet rs=ps.executeQuery();
 		while(rs.next()) {

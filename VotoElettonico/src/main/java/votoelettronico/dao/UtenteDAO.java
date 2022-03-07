@@ -26,7 +26,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
@@ -38,7 +38,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 					t= new Scrutinatore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username")) ;
 				}
 				
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -67,7 +67,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		try {
 			
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ps.setString(1, id);
 			ps.setString(2, sha1);
@@ -81,7 +81,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 				}
 			}
 				
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -95,7 +95,6 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		List<Utente> l= new ArrayList<Utente>();
 		try {
 			
-			DBConnection.getInstance().openConnection();
 			PreparedStatement ps = DBConnection.getInstance().prepara("SELECT * FROM Utente");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
@@ -108,7 +107,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 					l.add(new Scrutinatore(rs.getString("nome"),rs.getString("cognome"),rs.getString("username"))) ;
 				}
 			}	
-			DBConnection.getInstance().closeConnection();		
+					
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -131,14 +130,14 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		}
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
 			preparedStatement.setString(1, t.getNome()); 
 			preparedStatement.setString(2, t.getCognome());
 			preparedStatement.setString(3, t.getCodiceFiscale());
 			preparedStatement.setString(4, ruolo);
 			/*int row =*/preparedStatement.executeUpdate();
-			DBConnection.getInstance().closeConnection();
+			
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -167,7 +166,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			}
 		
 		
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
 			preparedStatement.setString(1, t.getNome()); 
 			preparedStatement.setString(2, t.getCognome());
@@ -175,7 +174,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 			preparedStatement.setString(4, sha1);
 			preparedStatement.setString(5, ruolo);
 			/*int row =*/preparedStatement.executeUpdate();
-			DBConnection.getInstance().closeConnection();
+			
 		} catch (Exception e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -187,13 +186,13 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		
 		String query = "UPDATE Utente SET nome = ? , cognome = ? WHERE username = ?;";
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
 			preparedStatement.setString(1, t.getNome()); 
 			preparedStatement.setString(2, t.getCognome());
 			preparedStatement.setString(3, t.getCodiceFiscale());
 			preparedStatement.executeUpdate();
-			DBConnection.getInstance().closeConnection();
+			
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -206,11 +205,11 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		String query = "DELETE FROM Utente WHERE username = ?";
 		
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement preparedStatement = DBConnection.getInstance().prepara(query);
 			preparedStatement.setString(1, t.getCodiceFiscale()); 
 			preparedStatement.executeUpdate();
-			DBConnection.getInstance().closeConnection();
+			
 		} catch (SQLException e) {
 			VotoLogger.writeToLog("Error : ", Level.WARNING, e);
 		}
@@ -223,7 +222,7 @@ public class UtenteDAO implements GenericDAO<Utente>{
 		String query = "SELECT Count(*) AS conto FROM utente WHERE Ruolo = 'Elettore';";
 		int n = 0;
 		try {
-			DBConnection.getInstance().openConnection();
+			
 			PreparedStatement ps = DBConnection.getInstance().prepara(query);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
