@@ -48,7 +48,10 @@ public class TerminaSessioneController extends Controller implements Initializab
     	if(s!= null) {
     		SessioneDAO dao = (SessioneDAO) DAOFactory.getInstance().getSessioneDAO();
     		dao.closeSession(s);
-    		changeView("termina_sessione.fxml", logged);
+    		
+    		sessioniAttiveLV.getItems().remove(s);
+    		sessioniTerminateLV.getItems().add(s);
+    		
     		
     	}else {
     		AlertFactory.getInstance().getSlimAlert(AlertType.ERROR, "Seleziona una sessione da terminare").showAndWait();

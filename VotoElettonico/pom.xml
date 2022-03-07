@@ -9,6 +9,10 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>11</javafx.version>
         <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
+        <!-- Dependency versions -->
+   		<junit.jupiter.version>5.5.2</junit.jupiter.version>
+    	<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    
     </properties>
     <dependencies>
         <dependency>
@@ -26,6 +30,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.18</version>
 		</dependency>
+		<dependency>
+      <groupId>org.junit.jupiter</groupId>
+      	<artifactId>junit-jupiter-engine</artifactId>
+      	<version>${junit.jupiter.version}</version>
+      	<scope>test</scope>
+    </dependency>
+		
+		
     </dependencies>
     <build>
         <plugins>
@@ -46,6 +58,12 @@
                     <mainClass>votoelettronico.App</mainClass>
                 </configuration>
             </plugin>
+             <!-- plugin to run test cases from maven -->
+      		<plugin>
+	        	<artifactId>maven-surefire-plugin</artifactId>
+	        	<version>${maven-surefire-plugin.version}</version>
+	     	</plugin>
+            
         </plugins>
         
           <resources>
