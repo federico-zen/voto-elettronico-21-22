@@ -13,12 +13,13 @@
 ◽ Diagramma delle classi ❌ <br>
 ◽ Diagrammi di sequenza dei casi d’uso ❌<br>
 ◽ Diagrammi delle attività ❌<br>
-◽ Macchine di stato ❌<br>
-◽ Diagramma delle componenti ❌<br>
+◽ Macchine di stato ✔️<br>
+◽ Diagramma delle componenti ✔️<br>
 ◽ Diagramma di deployment ✔️<br>
 ◽ Definizione DataBase ✔️<br>
-◽ Implementazione ❌<br>
-◽ Testing ❌<br>
+◽ Implementazione ✔️<br>
+◽ Vincoli OCL e JML ❌<br>
+◽ Testing ✔️<br>
 
 </p>
 
