@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class RisultatoPartiti extends Risultato {
 		
-	Partito vincitore;
-	int nVotiC;
-	Map<Partecipante,Integer> voti;
+	private Partito vincitore;
+	private int nVotiC;
+	private Map<Partecipante,Integer> voti;
 
 	public RisultatoPartiti(int nVotanti, int nAstenuti, String vittoria, int nElettori,Map<Partecipante,Integer> voti) {
 		super(nVotanti, nAstenuti, vittoria, nElettori);

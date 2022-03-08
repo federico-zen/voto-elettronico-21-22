@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CategoricoPreferenze extends Voto implements Iterable<Candidato>{
-	List<Candidato> preferenze;
+	private List<Candidato> preferenze;
 	
 	public CategoricoPreferenze(List<Candidato> preferenze) {
 		super("Categorico-Preferenze");

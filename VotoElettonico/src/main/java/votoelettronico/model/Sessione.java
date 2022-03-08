@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Sessione implements Iterable<Partito> {
 	
-	int id;
-	String nome;
-	String mod_voto;
-	String mod_vittoria;
-	String domanda;
-	boolean stato;
-	List<Partito> lPartiti;
+	private int id;
+	private String nome;
+	private String mod_voto;
+	private String mod_vittoria;
+	private String domanda;
+	private boolean stato;
+	private List<Partito> lPartiti;
 	
 	public Sessione() {
 		

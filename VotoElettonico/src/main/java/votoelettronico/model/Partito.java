@@ -7,8 +7,8 @@ import java.util.List;
 public class Partito extends Partecipante implements Iterable<Candidato> {
 	
 	//Immagine
-	Blob logo;
-	List<Candidato> candidati ;
+	private Blob logo;
+	private List<Candidato> candidati ;
 	
 	/*public Partito(int id,String nome,List<Candidato> candidati) {
 		super(id,nome);

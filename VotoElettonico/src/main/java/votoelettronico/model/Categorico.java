@@ -1,7 +1,7 @@
 package votoelettronico.model;
 
 public class Categorico extends Voto{
-	Partecipante preferenza;
+	private Partecipante preferenza;
 
 	public Categorico(Partecipante preferenza,String tipo) {
 		super(tipo);

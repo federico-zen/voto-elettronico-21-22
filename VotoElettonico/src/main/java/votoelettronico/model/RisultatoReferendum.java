@@ -2,8 +2,8 @@ package votoelettronico.model;
 
 public class RisultatoReferendum extends Risultato {
 	
-	int nSi;
-	int nNo;
+	private int nSi;
+	private int nNo;
 	
 	public RisultatoReferendum(int nVotanti, int nAstenuti,int nSi,int nNo,String vittoria,int nElettori) {
 		super(nVotanti, nAstenuti,vittoria,nElettori);

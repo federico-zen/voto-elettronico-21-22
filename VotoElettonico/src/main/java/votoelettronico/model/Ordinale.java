@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Ordinale extends Voto implements Iterable<Partecipante>{
-	List<Partecipante> preferenza;
+	private List<Partecipante> preferenza;
 	
 
 	public Ordinale(List<Partecipante> preferenza,String tipo) {

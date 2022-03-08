@@ -2,7 +2,7 @@ package votoelettronico.model;
 
 public class Candidato extends Partecipante {
 	
-	String cognome;
+	private String cognome;
 	
 	public Candidato(int id,String nome,String cognome) {
 		super(id,nome);

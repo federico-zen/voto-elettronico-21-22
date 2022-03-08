@@ -2,10 +2,10 @@ package votoelettronico.model;
 
 public abstract class Risultato {
 	
-	String vittoria;
-	int nVotanti;
-	int nAstenuti;
-	int nElettori;
+	protected String vittoria;
+	protected int nVotanti;
+	protected int nAstenuti;
+	protected int nElettori;
 	
 	public Risultato(int nVotanti, int nAstenuti,String vittoria,int nElettori) {
 		super();

@@ -2,7 +2,7 @@ package votoelettronico.model;
 
 public class Referendum extends Voto {
 	
-	boolean risposta;
+	private boolean risposta;
 
 	public Referendum(int id,boolean risposta) {
 		super(id,"Referendum");
