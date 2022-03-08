@@ -6,9 +6,12 @@ import java.util.List;
 
 public class Partito extends Partecipante implements Iterable<Candidato> {
 	
+	/*@   invariant candidati.size()> 0@*/
+	/*@   invariant (\forall Candidato c; candidati.contains(c);c != null)@*/
+	
 	//Immagine
-	private Blob logo;
-	private List<Candidato> candidati ;
+	private /*@ non_null; spec_public@*/ Blob logo;
+	private /*@ non_null; spec_public@*/ List<Candidato> candidati ;
 	
 	/*public Partito(int id,String nome,List<Candidato> candidati) {
 		super(id,nome);

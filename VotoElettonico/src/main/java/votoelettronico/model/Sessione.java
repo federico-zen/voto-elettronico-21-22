@@ -5,12 +5,16 @@ import java.util.List;
 
 public class Sessione implements Iterable<Partito> {
 	
-	private int id;
-	private String nome;
-	private String mod_voto;
-	private String mod_vittoria;
+	/*@   invariant mod_voto.equals("Referendum") -> domanda != null @*/
+	/*@   invariant !mod_voto.equals("Referendum") -> lPartiti != null @*/
+	
+	
+	private int  id;
+	private String /*@ non_null; spec_public@*/ nome;
+	private String /*@ non_null; spec_public@*/mod_voto;
+	private String /*@ non_null; spec_public@*/mod_vittoria;
 	private String domanda;
-	private boolean stato;
+	private boolean /*@ non_null; spec_public@*/ stato;
 	private List<Partito> lPartiti;
 	
 	public Sessione() {
