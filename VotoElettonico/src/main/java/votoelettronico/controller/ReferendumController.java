@@ -79,7 +79,7 @@ public class ReferendumController extends Controller {
     		//Carica Scheda
     		RadioButton b = (RadioButton) scelta.getSelectedToggle();
     		String risposta = b.getText();
-    		System.out.println(risposta);
+    		
     		VotoDAO daoV = (VotoDAO) DAOFactory.getInstance().getVotoDAO();
     		if(risposta.equalsIgnoreCase("no")) {
     			daoV.save(new Referendum(false),s.getId());
