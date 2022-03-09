@@ -11,7 +11,7 @@
 <p> 
 ◽ Diagramma dei casi d’uso e descrizione degli scenari dei casi d’uso ✔️<br>
 ◽ Diagramma delle classi ✔️ <br>
-◽ Diagrammi di sequenza dei casi d’uso ❌<br>
+◽ Diagrammi di sequenza dei casi d’uso ✔️<br>
 ◽ Diagrammi delle attività ✔️<br>
 ◽ Macchine di stato ✔️<br>
 ◽ Diagramma delle componenti ✔️<br>
